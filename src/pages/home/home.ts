@@ -3,24 +3,21 @@ import {PouchDbService} from "../../app/data/pouchDb.service";
 
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html',
-//  uses: [
-//    PouchDbService
-//  ]
+  templateUrl: 'home.html'
 })
-//@Inject(PouchDbService)
+@Inject(PouchDbService)
 export class HomePage {
 
-  constructor(private pouchDb : PouchDbService) {
+  constructor(private pouchDb: PouchDbService) {
 
   }
 
-  onPut (key : string, value : string) : void {
+  onPut(key: string, value: string): void {
     this.pouchDb.put(key, value);
   }
 
 
-  onGetAll () : void {
+  onGetAll(): void {
     console.log('Get all clicked!');
   }
 

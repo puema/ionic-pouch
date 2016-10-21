@@ -1,15 +1,29 @@
 import {Injectable} from '@angular/core';
+import PouchDB from 'pouchdb-browser';
+import Database = PouchDB.Database;
 
 @Injectable()
 export class PouchDbService {
-  pouchDb : PouchDB.Database<{propertyName: 'hallo'}>;
+  pouchDb : Database<any>;
 
   constructor () {
-    this.pouchDb = new PouchDB('TestBase');
+    this.pouchDb = new PouchDB<any>("test");
   }
 
-  put (key : string, value : string) : void {
-    this.pouchDb.put(new PouchDB.Core.Document('TestDocument'));
+  put (key : string, value : string) {
+
+    var doc = {
+      "_id": "mittens",
+      "name": "Mittens",
+      "occupation": "kitten",
+      "age": 3,
+      "hobbies": [
+        "playing with balls of yarn",
+        "chasing laser pointers",
+        "lookin' hella cute"
+      ]
+    };
+    this.pouchDb.put(doc);
   }
 
   getAll () : any {
