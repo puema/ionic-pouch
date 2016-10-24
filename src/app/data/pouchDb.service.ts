@@ -4,30 +4,27 @@ import Database = PouchDB.Database;
 
 @Injectable()
 export class PouchDbService {
-  pouchDb : Database<any>;
+  pouchDb: Database<any>;
 
-  constructor () {
+  constructor() {
     this.pouchDb = new PouchDB<any>("test");
   }
 
-  put (key : string, value : string) {
+  put(key: string, value: string) {
 
     var doc = {
-      "_id": "mittens",
-      "name": "Mittens",
-      "occupation": "kitten",
-      "age": 3,
-      "hobbies": [
-        "playing with balls of yarn",
-        "chasing laser pointers",
-        "lookin' hella cute"
-      ]
+      "_id": key,
+      "value": value
     };
+
     this.pouchDb.put(doc);
   }
 
-  getAll () : any {
-    return this.pouchDb.allDocs();
-  }
+  getAll(): any {
+    return this.pouchDb.allDocs({
+      include_docs: true,
+      attachments: true
+    });
 
+  }
 }

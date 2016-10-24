@@ -12,13 +12,18 @@ export class HomePage {
 
   }
 
+  public dbEntries: any;
+
   onPut(key: string, value: string): void {
     this.pouchDb.put(key, value);
   }
 
 
   onGetAll(): void {
-    console.log('Get all clicked!');
+    this.pouchDb.getAll().then((result) => {
+      this.dbEntries = result.rows;
+    }).catch(function (err) {
+      console.log(err);
+    });
   }
-
 }
