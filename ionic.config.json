@@ -2,5 +2,12 @@
   "name": "ionic-pouch",
   "app_id": "",
   "v2": true,
-  "typescript": true
+  "defaultBrowser": "chrome",
+  "typescript": true,
+  "proxies": [
+    {
+      "path": "/testdb",
+      "proxyUrl": "https://couch.forge.codefoundry.de/testdb"
+    }
+  ]
 }

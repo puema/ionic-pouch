@@ -4,10 +4,12 @@ import Database = PouchDB.Database;
 
 @Injectable()
 export class PouchDbService {
-  pouchDb: Database<any>;
+  pouchDb: any;
+  remoteDb: Database<any>;
 
   constructor() {
     this.pouchDb = new PouchDB<any>("test");
+    this.remoteDb = new PouchDB<any>("http://localhost:8100/testdb");
   }
 
   put(key: string, value: string) {
@@ -22,9 +24,12 @@ export class PouchDbService {
 
   getAll(): any {
     return this.pouchDb.allDocs({
-      include_docs: true,
-      attachments: true
+      include_docs: true
     });
 
+  }
+
+  sync(){
+    this.pouchDb.sync(this.remoteDb);
   }
 }
