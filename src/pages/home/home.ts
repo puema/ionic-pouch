@@ -14,8 +14,11 @@ export class HomePage {
 
   public dbEntries: any;
 
+  public Key: string;
+  public Name: string;
+
   onPut(key: string, value: string): void {
-    this.pouchDb.put(key, value);
+    this.pouchDb.put(this.Key, this.Name);
   }
 
 
@@ -26,4 +29,6 @@ export class HomePage {
       console.log(err);
     });
   }
+
+
 }
