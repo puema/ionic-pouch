@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import PouchDB from 'pouchdb-browser';
 import Database = PouchDB.Database;
+import {Article} from "./Article";
 
 @Injectable()
 export class PouchDbService {
@@ -12,14 +13,8 @@ export class PouchDbService {
     this.remoteDb = new PouchDB<any>("http://localhost:8100/testdb");
   }
 
-  put(key: string, value: string) {
-
-    var doc = {
-      "_id": key,
-      "value": value
-    };
-
-    this.pouchDb.put(doc);
+  put(article: Article) {
+    this.pouchDb.put(article);
   }
 
   getAll(): any {
@@ -29,7 +24,7 @@ export class PouchDbService {
 
   }
 
-  sync(){
+  sync() {
     this.pouchDb.sync(this.remoteDb);
   }
 }

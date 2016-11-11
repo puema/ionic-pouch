@@ -1,5 +1,6 @@
 import {Component, Inject} from "@angular/core";
 import {PouchDbService} from "../../app/data/pouchDb.service";
+import {Article} from "../../app/data/Article";
 
 @Component({
   selector: 'page-home',
@@ -17,8 +18,9 @@ export class HomePage {
   public Key: string;
   public Name: string;
 
-  onPut(key: string, value: string): void {
-    this.pouchDb.put(this.Key, this.Name);
+  onPut(): void {
+    let article = new Article(this.Key, this.Name);
+    this.pouchDb.put(article);
   }
 
 
@@ -30,7 +32,7 @@ export class HomePage {
     });
   }
 
-  onSync(): void{
+  onSync(): void {
     this.pouchDb.sync();
   }
 
