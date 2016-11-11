@@ -30,5 +30,9 @@ export class HomePage {
     });
   }
 
+  onSync(): void{
+    this.pouchDb.sync();
+  }
+
 
 }
