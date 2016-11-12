@@ -1,15 +1,15 @@
 import {Component, Inject} from "@angular/core";
-import {PouchDbService} from "../../app/data/pouchDb.service";
 import {Article} from "../../app/data/Article";
+import {IDatabaseService} from "../../app/data/IDatabaseServie";
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-@Inject(PouchDbService)
+
 export class HomePage {
 
-  constructor(private pouchDb: PouchDbService) {
+  constructor(@Inject("IDatabaseService") private pouchDb: IDatabaseService) {
 
   }
 

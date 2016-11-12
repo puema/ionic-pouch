@@ -4,9 +4,10 @@ import Database = PouchDB.Database;
 import {Article} from "./Article";
 import AllDocsResponse = PouchDB.Core.AllDocsResponse;
 import Response = PouchDB.Core.Response;
+import {IDatabaseService} from "./IDatabaseServie";
 
 @Injectable()
-export class PouchDbService {
+export class PouchDbService implements IDatabaseService {
   pouchDb: Database<Article>;
   remoteDb: Database<Article>;
 
