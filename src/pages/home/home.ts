@@ -20,7 +20,11 @@ export class HomePage {
 
   onPut(): void {
     let article = new Article(this.Key, this.Name);
-    this.pouchDb.put(article);
+    this.pouchDb.put(article).then((result) => {
+      console.log(result);
+    }).catch(function (err) {
+      console.log(err);
+    });
   }
 
 
