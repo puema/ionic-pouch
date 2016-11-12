@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "@ionic/app-scripts": "^0.0.36",
+    "@types/es6-promise": "0.0.32",
     "@types/pouchdb": "^5.4.28",
     "typescript": "^2.0.3"
   },
