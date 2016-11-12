@@ -31,7 +31,6 @@ export class PouchDbService implements IDatabaseService {
   }
 
   sync() {
-    //Cast this.pouchDb to any, as there is no support for sync in the recent definition file
-    (<any>this.pouchDb).sync(this.remoteDb);
+    this.pouchDb.sync(this.remoteDb);
   }
 }
