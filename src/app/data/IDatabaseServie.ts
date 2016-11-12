@@ -5,6 +5,7 @@ import AllDocsResponse = PouchDB.Core.AllDocsResponse;
 export interface IDatabaseService {
   put(article: Article): Promise<Response>;
   getAll(): Promise<AllDocsResponse<Article>>;
+  delete(article: Article): Promise<Response>
   sync();
 }
 

@@ -24,7 +24,10 @@ export class PouchDbService implements IDatabaseService {
     return this.pouchDb.allDocs({
       include_docs: true
     });
+  }
 
+  delete(article: Article): Promise<Response> {
+    return this.pouchDb.remove(article);
   }
 
   sync() {

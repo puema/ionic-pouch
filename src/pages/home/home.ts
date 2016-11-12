@@ -13,7 +13,7 @@ export class HomePage {
 
   }
 
-  public dbEntries: any;
+  public dbEntries: Array<any>;
 
   public Key: string;
   public Name: string;
@@ -31,6 +31,14 @@ export class HomePage {
   onGetAll(): void {
     this.pouchDb.getAll().then((result) => {
       this.dbEntries = result.rows;
+    }).catch(function (err) {
+      console.log(err);
+    });
+  }
+
+  onDelete(article: Article){
+    this.pouchDb.delete(article).then((result) => {
+      console.log(result);
     }).catch(function (err) {
       console.log(err);
     });
