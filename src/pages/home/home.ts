@@ -22,6 +22,7 @@ export class HomePage {
     let guid = this.guidService.generateGuid();
     let article = new Article(guid, this.Name);
     this.pouchDb.put(article).then((result) => {
+      this.Name = "";
       console.log(result);
     }).catch(function (err) {
       console.log(err);
