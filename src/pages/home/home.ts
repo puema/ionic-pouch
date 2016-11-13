@@ -16,7 +16,6 @@ export class HomePage {
 
   public dbEntries: Array<any>;
 
-  public Key: string;
   public Name: string;
 
   onPut(): void {
