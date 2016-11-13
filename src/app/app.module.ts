@@ -6,6 +6,7 @@ import {ContactPage} from '../pages/contact/contact';
 import {HomePage} from '../pages/home/home';
 import {TabsPage} from '../pages/tabs/tabs';
 import {PouchDbService} from "./data/pouchDb.service";
+import {GuidService} from "./guid/GuidService";
 
 @NgModule({
   declarations: [
@@ -26,6 +27,9 @@ import {PouchDbService} from "./data/pouchDb.service";
     HomePage,
     TabsPage
   ],
-  providers: [{provide: "IDatabaseService", useClass: PouchDbService}]
+  providers: [
+    {provide: "IDatabaseService", useClass: PouchDbService},
+    {provide: "IGuidService", useClass: GuidService},
+  ]
 })
 export class AppModule {}

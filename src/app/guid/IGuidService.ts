@@ -1,0 +1,3 @@
+interface IGuidService {
+  generateGuid(): string;
+}

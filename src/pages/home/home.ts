@@ -9,7 +9,8 @@ import {IDatabaseService} from "../../app/data/IDatabaseServie";
 
 export class HomePage {
 
-  constructor(@Inject("IDatabaseService") private pouchDb: IDatabaseService) {
+  constructor(@Inject("IDatabaseService") private pouchDb: IDatabaseService,
+              @Inject("IGuidService") private guidService: IGuidService) {
 
   }
 
@@ -19,7 +20,8 @@ export class HomePage {
   public Name: string;
 
   onPut(): void {
-    let article = new Article(this.Key, this.Name);
+    let guid = this.guidService.generateGuid();
+    let article = new Article(guid, this.Name);
     this.pouchDb.put(article).then((result) => {
       console.log(result);
     }).catch(function (err) {
@@ -36,7 +38,7 @@ export class HomePage {
     });
   }
 
-  onDelete(article: Article){
+  onDelete(article: Article) {
     this.pouchDb.delete(article).then((result) => {
       console.log(result);
     }).catch(function (err) {
