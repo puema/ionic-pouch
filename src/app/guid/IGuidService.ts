@@ -1,3 +1,3 @@
-interface IGuidService {
+export interface IGuidService {
   generateGuid(): string;
 }

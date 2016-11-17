@@ -1,3 +1,5 @@
+import {IGuidService} from "./IGuidService";
+
 export class GuidService implements IGuidService {
   generateGuid(): string {
     //https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript

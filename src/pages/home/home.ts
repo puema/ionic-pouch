@@ -1,6 +1,7 @@
 import {Component, Inject} from "@angular/core";
 import {Article} from "../../app/data/Article";
 import {IDatabaseService} from "../../app/data/IDatabaseServie";
+import {IGuidService} from "../../app/guid/IGuidService";
 
 @Component({
   selector: 'page-home',
