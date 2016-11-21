@@ -15,7 +15,10 @@ declare module '*'
 ;
 
 declare namespace PouchDB {
-  import Options = PouchDB.Core.Options;
+
+  type SyncEvent = "change" | "paused" | "active" | "denied" | "complete" | "error";
+  type SyncDirection = "push" | "pull";
+
   export interface Database<Content extends Core.Encodable> {
     sync(remoteDB: Database<Content>): SyncObject;
     sync(remoteDB: Database<Content>, options: any): SyncObject;
@@ -27,17 +30,20 @@ declare namespace PouchDB {
   }
 
   export interface SyncResponse {
+    direction: SyncDirection;
+    change: ReplicationResponse;
+  }
+
+  export interface ReplicationResponse {
     doc_write_failures: number,
     docs_read: number,
     docs_written: number,
-    end_time: Date,
     errors: Array,
     last_seq: number,
     ok: boolean,
     start_time: Date,
+    end_time?: Date,
     status?: string,
     docs?: Array
   }
-
-  type SyncEvent = "change" | "paused" | "active" | "denied" | "complete" | "error";
 }
