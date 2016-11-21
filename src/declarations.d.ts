@@ -18,29 +18,26 @@ declare namespace PouchDB {
   import Options = PouchDB.Core.Options;
   export interface Database<Content extends Core.Encodable> {
     sync(remoteDB: Database<Content>): SyncObject;
-    sync(remoteDB: Database<Content>, options: SyncOptions): SyncObject;
-  }
-
-  export interface SyncOptions extends Options {
-    live: boolean;
-    retry: boolean;
-
-    //Filter Options
-    filter: any;
-    doc_ids: Array<string>;
-    query_params: any;
-    view: any;
-
-    //Advanced Options
-    since: any;
-    heartbeat: any;
-    timeout: number;
-    batch_size: number;
-    batches_limit: number;
-    back_off_function: any;
+    sync(remoteDB: Database<Content>, options: any): SyncObject;
   }
 
   export interface SyncObject {
+    on(event: SyncEvent, callback: (response?: SyncResponse) => void): SyncObject;
     cancel();
   }
+
+  export interface SyncResponse {
+    doc_write_failures: number,
+    docs_read: number,
+    docs_written: number,
+    end_time: Date,
+    errors: Array,
+    last_seq: number,
+    ok: boolean,
+    start_time: Date,
+    status?: string,
+    docs?: Array
+  }
+
+  type SyncEvent = "change" | "paused" | "active" | "denied" | "complete" | "error";
 }
