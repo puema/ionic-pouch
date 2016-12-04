@@ -1,19 +1,27 @@
 import {Injectable} from '@angular/core';
+import {Article} from "./Article";
+import {IDatabaseService} from "./IDatabaseServie";
 import PouchDB from 'pouchdb-browser';
 import Database = PouchDB.Database;
-import {Article} from "./Article";
+import ChangeEventEmitter = PouchDB.ChangeEventEmitter;
 import AllDocsResponse = PouchDB.Core.AllDocsResponse;
 import Response = PouchDB.Core.Response;
-import {IDatabaseService} from "./IDatabaseServie";
+
 
 @Injectable()
 export class PouchDbService implements IDatabaseService {
   pouchDb: Database<Article>;
   remoteDb: Database<Article>;
+  changeEventEmitter: ChangeEventEmitter;
 
   constructor() {
     this.pouchDb = new PouchDB<Article>("test");
     this.remoteDb = new PouchDB<Article>("http://localhost:8100/testdb");
+    this.changeEventEmitter = this.pouchDb.changes({
+      since: 'now',
+      live: true,
+      include_docs: true
+    });
   }
 
   put(article: Article): Promise<Response> {
@@ -31,6 +39,6 @@ export class PouchDbService implements IDatabaseService {
   }
 
   sync() {
-    this.pouchDb.sync(this.remoteDb);
+    this.pouchDb.sync(this.remoteDb, {retry: true, live: true});
   }
 }

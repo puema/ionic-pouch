@@ -13,6 +13,12 @@ export class HomePage {
   constructor(@Inject("IDatabaseService") private pouchDb: IDatabaseService,
               @Inject("IGuidService") private guidService: IGuidService) {
 
+
+    this.pouchDb.changeEventEmitter.on('change', (change) => {
+      this.onGetAll();
+    }).on('error', (err) => {
+      console.log(err);
+    });
   }
 
   public dbEntries: Array<any>;
@@ -50,6 +56,4 @@ export class HomePage {
   onSync(): void {
     this.pouchDb.sync();
   }
-
-
 }
