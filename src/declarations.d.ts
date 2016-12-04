@@ -20,12 +20,14 @@ declare namespace PouchDB {
   type SyncDirection = "push" | "pull";
 
   export interface Database<Content extends Core.Encodable> {
-    sync(remoteDB: Database<Content>): SyncObject;
-    sync(remoteDB: Database<Content>, options: any): SyncObject;
+    sync(remoteDB: Database<Content>): SyncEventEmitter;
+    sync(remoteDB: Database<Content>, options: any): SyncEventEmitter;
+
+    changes(options: any): ChangeEventEmitter;
   }
 
-  export interface SyncObject {
-    on(event: SyncEvent, callback: (response?: SyncResponse) => void): SyncObject;
+  export interface SyncEventEmitter {
+    on(event: SyncEvent, callback: (response?: SyncResponse) => void): SyncEventEmitter;
     cancel();
   }
 
@@ -38,12 +40,23 @@ declare namespace PouchDB {
     doc_write_failures: number,
     docs_read: number,
     docs_written: number,
-    errors: Array,
+    errors: Array<any>,
     last_seq: number,
     ok: boolean,
     start_time: Date,
     end_time?: Date,
     status?: string,
-    docs?: Array
+    docs?: Array<any>
+  }
+
+  type ChangeEvent = "change" |"complete" | "error";
+
+  export interface ChangeEventEmitter {
+    on(event: ChangeEvent, callback: (response?: ChangeResponse) => void): ChangeEventEmitter;
+    cancel();
+  }
+
+  export interface ChangeResponse {
+    //TODO
   }
 }
