@@ -13,7 +13,7 @@ export class HomePage {
   constructor(@Inject("IDatabaseService") private pouchDb: IDatabaseService,
               @Inject("IGuidService") private guidService: IGuidService) {
 
-
+    this.onGetAll();
     this.pouchDb.changeEventEmitter.on('change', (change) => {
       this.onGetAll();
     }).on('error', (err) => {
