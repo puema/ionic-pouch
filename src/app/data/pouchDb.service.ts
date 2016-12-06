@@ -6,6 +6,7 @@ import Database = PouchDB.Database;
 import ChangeEventEmitter = PouchDB.ChangeEventEmitter;
 import AllDocsResponse = PouchDB.Core.AllDocsResponse;
 import Response = PouchDB.Core.Response;
+import SyncEventEmitter = PouchDB.SyncEventEmitter;
 
 
 @Injectable()
@@ -38,7 +39,7 @@ export class PouchDbService implements IDatabaseService {
     return this.pouchDb.remove(article);
   }
 
-  sync() {
-    this.pouchDb.sync(this.remoteDb, {retry: true, live: true});
+  sync(): SyncEventEmitter {
+    return this.pouchDb.sync(this.remoteDb, {retry: true, live: true});
   }
 }
