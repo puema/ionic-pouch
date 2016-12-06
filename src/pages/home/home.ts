@@ -2,6 +2,7 @@ import {Component, Inject} from "@angular/core";
 import {Article} from "../../app/data/Article";
 import {IDatabaseService} from "../../app/data/IDatabaseServie";
 import {IGuidService} from "../../app/guid/IGuidService";
+import SyncEventEmitter = PouchDB.SyncEventEmitter;
 
 @Component({
   selector: 'page-home',
@@ -22,8 +23,8 @@ export class HomePage {
   }
 
   public dbEntries: Array<any>;
-
   public Name: string;
+  public syncEventEmitter: SyncEventEmitter;
 
   onPut(): void {
     let guid = this.guidService.generateGuid();
@@ -53,7 +54,15 @@ export class HomePage {
     });
   }
 
-  onSync(): void {
-    this.pouchDb.sync();
+  onToggleSync(sync: boolean): void {
+    if (sync) {
+      this.syncEventEmitter = this.pouchDb.sync();
+    } else {
+      if (this.syncEventEmitter !== undefined) {
+        this.syncEventEmitter.cancel();
+      } else {
+        console.log("Trying to call cancel on undefined syncEventEmitter");
+      }
+    }
   }
 }

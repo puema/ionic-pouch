@@ -6,6 +6,11 @@
 
 <ion-content padding>
 
+  <ion-item>
+    <ion-label> Sync</ion-label>
+    <ion-toggle #toggle checked="false" (ionChange)="onToggleSync(toggle.checked)"></ion-toggle>
+  </ion-item>
+
   <ion-list>
     <ion-item *ngFor="let item of dbEntries">
       <p>{{item.doc.value}}</p>
@@ -15,13 +20,10 @@
     </ion-item>
   </ion-list>
 
-  <input [(ngModel)]="Name" />
+  <input [(ngModel)]="Name"/>
 
   <button ion-button (click)='onPut()'>
     Add
-  </button>
-  <button ion-button (click)="onSync()">
-    Sync
   </button>
 
 </ion-content>
