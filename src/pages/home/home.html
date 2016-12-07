@@ -1,15 +1,17 @@
 <ion-header>
   <ion-navbar>
     <ion-title>Home</ion-title>
+    <ion-buttons end>
+      <ion-item ngClass="navbarToggle">
+        <ion-label> Sync</ion-label>
+        <ion-toggle #toggle checked="false" (ionChange)="onToggleSync(toggle.checked)"></ion-toggle>
+      </ion-item>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 
-  <ion-item>
-    <ion-label> Sync</ion-label>
-    <ion-toggle #toggle checked="false" (ionChange)="onToggleSync(toggle.checked)"></ion-toggle>
-  </ion-item>
 
   <ion-list>
     <ion-item *ngFor="let item of dbEntries">
