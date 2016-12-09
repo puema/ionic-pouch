@@ -1,5 +1,6 @@
 export class Article {
   _id: string;
+  _rev: string;
   value: string;
 
 
