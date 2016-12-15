@@ -1,0 +1,252 @@
+\documentclass[twoside=true, %  doppelseitiger Druck
+    DIV=12,% DIV Faktor für Satzspiegelberechnung, sie Doku zu KOMA Script
+    BCOR=15mm, % Bindekorrektur
+    chapterprefix=false,
+    headinclude=true,
+    footinclude=false,
+    mpinclude=false,
+    pagesize,%         write pagesize to DVI or PDF
+    fontsize=11pt,%             use this font size
+    paper=a4,%          use ISO A4
+    bibliography=totoc,%         write bibliography-chapter to table of contents
+    index=totoc,%         write index-chapter to table of contents
+    cleardoublepage=plain,% \cleardoublepage generates pages with pagestyle empty
+    headings=big,%       A4/B5
+    listof=flat,%        improved list of tables
+    numbers=noenddot
+  ]{scrbook}
+  
+\usepackage{scrhack}
+\usepackage[utf8]{inputenc}
+\usepackage{makeidx}
+\usepackage{amsfonts}
+\usepackage[slantedGreek,sc]{mathpazo}  % Schriftart Palatino
+%\usepackage{lmodern}    % statt mathpazo, falls CM Fonts verwendet werden sollen
+%\usepackage{mathptmx}    % statt mathpazo, falls Times  verwendet werden soll
+\usepackage[scaled=.95]{helvet}
+\usepackage{courier}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{amsmath}            % standard math notation (vectors/sets/...)
+\usepackage{bm}        % standard math notation (fonts)
+\usepackage{fixmath}        % standard math notation (fonts)
+\usepackage{graphicx}
+\usepackage[facing=yes]{floatrow}       % mehrere Gleitobjekte nebeneinander/caption neben Bild/Tabelle
+\usepackage[labelfont=bf,sf,font=small,labelsep=space,format=plain]{caption}
+\usepackage{subcaption}
+\usepackage{scrpage2}
+% \usepackage{pstool}  % einbinden falls psfrag verwendet werden soll
+\usepackage{epstopdf}
+\usepackage[ngerman]{babel}
+\usepackage{csquotes}
+\usepackage{ellipsis}  % Korrigiert den Weißraum um Auslassungspunkte
+\usepackage{microtype}  % optischer Randausgleich etc.
+\usepackage{url}
+\usepackage[backend=bibtex,style=alphabetic]{biblatex}
+% temoräry fix: siehe auch -->  
+%http://tex.stackexchange.com/questions/311426/bibliography-error-use-of-blxbblverbaddi-doesnt-match-its-definition-ve
+\makeatletter
+\def\blx@maxline{77}
+\makeatother
+
+\usepackage[table,dvipsnames]{xcolor}         % z.B. für schattierte Boxen
+\usepackage{framed}			% shaded Umgebung
+\usepackage[printonlyused]{acronym}
+\usepackage{tabulary}
+\usepackage{tabularx}
+% \usepackage{booktabs}
+\usepackage{ifthen}
+% \usepackage{float}
+\usepackage{pifont}
+\usepackage{marginnote}
+\usepackage[strict]{changepage}
+\usepackage{longtable,array,ragged2e,multirow}
+% Links im PDF
+\usepackage[colorlinks=false,pdfborder={0 0 0},breaklinks=true]{hyperref}
+\usepackage{tcolorbox}
+\usepackage{listings}
+\usepackage{todonotes}
+\usepackage{sourcecodepro}
+
+\tcbuselibrary{skins}
+
+\pdfoptionpdfminorversion=7
+
+%---------------- colors ------------------%
+\definecolor{primary}{HTML}{1A71B3}%
+\definecolor{secondary}{HTML}{283593}%
+\definecolor{accent}{HTML}{FF9800}%
+\colorlet{background}{primary!20}%
+
+%Code
+\definecolor{strings}{rgb}{0.6,0,0} % for strings
+\definecolor{comments}{rgb}{0.25,0.5,0.35} % comments
+\colorlet{keywords}{primary} % keywords
+\definecolor{javadoc}{rgb}{0.25,0.35,0.75} % javadoc
+\definecolor{codebackground}{HTML}{F8F8F8} %
+\colorlet{codeborder}{gray} %
+%-------------- end colors ----------------%
+
+%-------------- lengths ----------------%
+\newlength{\twfivec} %tablewidth für 5 Spalten
+\setlength{\twfivec}{\textwidth} %setze neue länge auf textbreite
+\addtolength{\twfivec}{-10\tabcolsep} %5 Spalten
+%------------- end lengths ---------------%
+
+%------------- customizations -------------%
+\makeindex
+
+\recalctypearea
+
+\selectlanguage{ngerman}
+
+\setkomafont{paragraph}{\normalfont\normalsize\bfseries}
+
+\deffootnote{1em}{1em}{\makebox[1em][l]{\thefootnotemark}}
+
+% Einstellungen für Bild-/Tabellenbeschriftung neben dem Bild
+\floatsetup[figure]{capbesideposition={inside,top}}
+\floatsetup[table]{capbesideposition={inside,top},style=plaintop}
+\renewfloatcommand{fcapside}{figure}[\capbeside][\FBwidth]
+\newfloatcommand{tcapside}{table}[\capbeside][\FBwidth]
+
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+\lstdefinelanguage{JavaScript}{
+  basicstyle=\ttfamily,
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{keywords}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{comments}\ttfamily,
+  stringstyle=\color{strings}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\newtcolorbox{borderbox}[2][]{
+	colback=background,
+	colframe=primary,
+	sharp corners=all,
+	boxrule=1pt,
+	fonttitle=\bfseries,
+	left=12pt,
+	enlarge top by=1em,
+  	enlarge bottom by=1em,
+	title=#2,
+	#1
+}
+
+\newtcolorbox{codebox}{
+	colback=codebackground,
+	colframe=codeborder,
+	sharp corners=all,
+	boxrule=0.5pt,
+	left=2em,
+	top=0em,
+	bottom=0em,
+	enlarge top by=.5em,
+  	enlarge bottom by=.5em,
+}
+
+\newtcolorbox{simplebox}[1][]{
+	colback=background,
+	colframe=primary,
+	sharp corners=all,
+	fonttitle=\bfseries,
+	toprule=0pt,
+	leftrule=2pt,
+	rightrule=0pt,
+	bottomrule=0pt,
+	#1
+}
+%------------- end customizations -------------%
+
+%----------------  renew commands ------------------%
+\renewcommand{\marginfont}{\strut\hskip-1em % Das ist erst einmal ein
+                                % gemeiner Trick zur korrekten Ausrichtung
+                                % kleiner Fontgrößen mit abweichendem
+                                % Zeilenabstand.
+  \linespread{1}\footnotesize% Das ist der Rest.
+}
+\renewcommand{\marginfont}{\footnotesize}
+
+\renewcommand{\thempfootnote}{\arabic{mpfootnote}}
+%--------------  end renew commands ----------------%
+
+%--------------- new commands ----------------------%
+\newcommand{\real}{\mathord{\mathrm{I\!R}}}
+
+\newcommand{\acr}[1]{\acs{#1} (\aclu{#1})}
+\newcommand{\acrp}[1]{\acsp{#1} (\aclp{#1})\acused{#1}}
+%---------------- end new commands ----------------%
+
+%--------------- new environments ----------------------%
+%depricated, use simplebox istead
+\newenvironment{citeenv}{%
+  \def\FrameCommand{%
+    \hspace{1pt}%
+    {\color{primary}\vrule width 2pt}%
+    {\color{background}\vrule width 1em}%
+    \colorbox{background}%
+  }%
+  \MakeFramed{\advance\hsize-\width\FrameRestore}%
+  % \noindent\hspace{-4.55pt}% disable indenting first paragraph
+  \begin{adjustwidth}{}{7pt}%
+  \vspace{.5em}%
+}
+{%
+  \vspace{.5em}\end{adjustwidth}\endMakeFramed%
+}
+%--------------- end environments ----------------------%
+
+\addbibresource{thesis.bib}
+
+%=============== beginn document ======================%
+\begin{document}
+\selectlanguage{ngerman}
+\def\figdir{figures}
+\def\tabledir{tables}
+
+\frontmatter
+\pagenumbering{alph}
+\pagestyle{scrplain}
+\pagestyle{empty}
+
+\include{title}
+\include{abstract}
+\cleardoubleemptypage
+
+\pagestyle{scrplain}
+\pagenumbering{roman}
+\include{toc}
+\include{acronyms}
+
+\pagestyle{scrheadings}
+
+
+\addtokomafont{caption}{\small}
+
+\mainmatter
+
+\include{chapters}
+
+\cleardoublepage
+
+% \bibliographystyle{natger} %für backend biber
+% \bibliography{thesis} %für backend biber
+\printbibliography
+
+\cleardoublepage
+
+
+\footnotesize
+\printindex
+
+
+\end{document}
