@@ -12,20 +12,30 @@
 
 <ion-content padding>
 
+  <ion-item>
+    <ion-input [(ngModel)]="Name" placeholder="Username"></ion-input>
+
+    <button ion-button clear item-right (click)='onPut()'>
+      Add
+    </button>
+  </ion-item>
 
   <ion-list>
     <ion-item *ngFor="let item of dbEntries">
-      <p>{{item.doc.value}}</p>
-      <button ion-button icon-only clear item-right (click)="onDelete(item.doc)">
+      <p *ngIf="!item.editMode">{{item.article.value}}</p>
+      <ion-input *ngIf="item.editMode" [(ngModel)]="item.article.value"></ion-input>
+
+      <button *ngIf="item.editMode" ion-button icon-only clear item-right (click)="onUpdate(item)">
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
+      <button *ngIf="!item.editMode" ion-button icon-only clear item-right (click)="onEdit(item)">
+        <ion-icon name="create"></ion-icon>
+      </button>
+
+      <button ion-button icon-only clear item-right (click)="onDelete(item.article.doc)">
         <ion-icon name="trash"></ion-icon>
       </button>
     </ion-item>
   </ion-list>
-
-  <input [(ngModel)]="Name"/>
-
-  <button ion-button (click)='onPut()'>
-    Add
-  </button>
 
 </ion-content>
