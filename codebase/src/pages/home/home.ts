@@ -4,6 +4,7 @@ import {IDatabaseService} from "../../app/data/IDatabaseServie";
 import {IGuidService} from "../../app/guid/IGuidService";
 import SyncEventEmitter = PouchDB.SyncEventEmitter;
 import {ArticleDisplayContainer} from "../../app/data/ArticleDisplayContainer";
+import { ToastController } from 'ionic-angular';
 
 @Component({
   selector: 'page-home',
@@ -13,7 +14,8 @@ import {ArticleDisplayContainer} from "../../app/data/ArticleDisplayContainer";
 export class HomePage {
 
   constructor(@Inject("IDatabaseService") private pouchDb: IDatabaseService,
-              @Inject("IGuidService") private guidService: IGuidService) {
+              @Inject("IGuidService") private guidService: IGuidService,
+              private toastCtrl: ToastController) {
 
     this.dbEntries = new Array<ArticleDisplayContainer>();
 
@@ -36,6 +38,7 @@ export class HomePage {
     let article = new Article(guid, this.Name);
     this.pouchDb.put(article).then((result) => {
       this.Name = "";
+      this.presentToast("Entry added.");
     }).catch(function (err) {
       console.log(err);
     });
@@ -45,7 +48,7 @@ export class HomePage {
     console.log(container);
     console.log(container.article);
     this.pouchDb.put(container.article).then((result) => {
-      console.log(result);
+      this.presentToast("Entry updated.");
       container.editMode = false;
     }).catch(function (err) {
       console.log(err);
@@ -55,11 +58,11 @@ export class HomePage {
   onGetAll(): void {
     this.pouchDb.getAll().then((result) => {
       this.dbEntries = new Array<ArticleDisplayContainer>();
-      console.log(result.rows);
       for (let response of result.rows) {
         var container = new ArticleDisplayContainer(response.doc);
         this.dbEntries.push(container);
       }
+      this.presentToast("Sync successful.");
     }).catch(function (err) {
       console.log(err);
     });
@@ -71,7 +74,7 @@ export class HomePage {
 
   onDelete(article: Article) {
     this.pouchDb.delete(article).then((result) => {
-      console.log(result);
+      this.presentToast("Entry deleted.");
     }).catch(function (err) {
       console.log(err);
     });
@@ -87,5 +90,13 @@ export class HomePage {
         console.log("Trying to call cancel on undefined syncEventEmitter");
       }
     }
+  }
+
+  presentToast(message: string): void {
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 3000
+    });
+    toast.present();
   }
 }
