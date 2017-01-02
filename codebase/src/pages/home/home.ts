@@ -1,7 +1,7 @@
 import {Component, Inject} from "@angular/core";
-import {Article} from "../../app/data/Article";
-import {IDatabaseService} from "../../app/data/IDatabaseServie";
-import {IGuidService} from "../../app/guid/IGuidService";
+import {Article} from "../../app/data/article";
+import {IDatabaseService} from "../../app/data/pouch-db.service";
+import {IGuidService} from "../../app/guid/guid.service";
 import SyncEventEmitter = PouchDB.SyncEventEmitter;
 
 @Component({
@@ -23,14 +23,14 @@ export class HomePage {
   }
 
   public dbEntries: Array<any>;
-  public Name: string;
+  public name: string;
   public syncEventEmitter: SyncEventEmitter;
 
   onPut(): void {
     let guid = this.guidService.generateGuid();
-    let article = new Article(guid, this.Name);
+    let article = new Article(guid, this.name);
     this.pouchDb.put(article).then((result) => {
-      this.Name = "";
+      this.name = "";
       console.log(result);
     }).catch(function (err) {
       console.log(err);

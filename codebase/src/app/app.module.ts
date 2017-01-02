@@ -5,8 +5,8 @@ import {AboutPage} from '../pages/about/about';
 import {ContactPage} from '../pages/contact/contact';
 import {HomePage} from '../pages/home/home';
 import {TabsPage} from '../pages/tabs/tabs';
-import {PouchDbService} from "./data/pouchDb.service";
-import {GuidService} from "./guid/GuidService";
+import {PouchDbService} from "./data/pouch-db.service";
+import {GuidService} from "./guid/guid.service";
 
 @NgModule({
   declarations: [
