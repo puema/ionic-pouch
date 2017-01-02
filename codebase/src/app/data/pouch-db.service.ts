@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Article} from "./Article";
-import {IDatabaseService} from "./IDatabaseServie";
+import {Article} from "./article";
 import PouchDB from 'pouchdb-browser';
 import Database = PouchDB.Database;
 import ChangeEventEmitter = PouchDB.ChangeEventEmitter;
@@ -8,6 +7,15 @@ import AllDocsResponse = PouchDB.Core.AllDocsResponse;
 import Response = PouchDB.Core.Response;
 import SyncEventEmitter = PouchDB.SyncEventEmitter;
 
+export interface IDatabaseService {
+  changeEventEmitter: ChangeEventEmitter;
+  put(article: Article): Promise<Response>;
+  getByRev(id: string, rev: string): Promise<Article>;
+  getWithConflicts(id: string): Promise<Article>;
+  getAll(): Promise<AllDocsResponse<Article>>;
+  delete(article: Article): Promise<Response>
+  sync(): SyncEventEmitter;
+}
 
 @Injectable()
 export class PouchDbService implements IDatabaseService {

@@ -1,4 +1,6 @@
-import {IGuidService} from "./IGuidService";
+export interface IGuidService {
+  generateGuid(): string;
+}
 
 export class GuidService implements IGuidService {
   generateGuid(): string {

@@ -1,7 +1,7 @@
 import {Component, Inject} from "@angular/core";
-import {Article} from "../../app/data/Article";
-import {IDatabaseService} from "../../app/data/IDatabaseServie";
-import {IGuidService} from "../../app/guid/IGuidService";
+import {Article} from "../../app/data/article";
+import {IDatabaseService} from "../../app/data/pouch-db.service";
+import {IGuidService} from "../../app/guid/guid.service";
 import SyncEventEmitter = PouchDB.SyncEventEmitter;
 import {ArticleDisplayContainer} from "../../app/data/ArticleDisplayContainer";
 import { ToastController } from 'ionic-angular';
@@ -30,16 +30,16 @@ export class HomePage {
   }
 
   public dbEntries: Array<ArticleDisplayContainer>;
-  public Name: string;
+  public name: string;
   public syncEventEmitter: SyncEventEmitter;
 
   public editMode: boolean;
 
   onPut(): void {
     let guid = this.guidService.generateGuid();
-    let article = new Article(guid, this.Name);
+    let article = new Article(guid, this.name);
     this.pouchDb.put(article).then((result) => {
-      this.Name = "";
+      this.name = "";
       this.presentToast("Entry added.");
     }).catch(function (err) {
       console.log(err);

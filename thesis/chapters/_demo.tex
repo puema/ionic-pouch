@@ -17,25 +17,36 @@ Eine Abbildung referenziert man so: Abbildung \ref{fig:bsp}
 
 Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi
 
+
 \section{PouchDB}
-\label{sec:Szenarien}
+\label{PouchDB}
+
+\subsection{Adapter}
+\label{Adapter}
+
+Laut eigener Dokumentation ist PouchDB keine eigenständige Datenbank. Stattdessen versteht sich PouchDB als Datenbankabstraktionsschicht und nutzt im Hintergrund andere Datenbanken. Dieser Zugriff auf andere Datenbanken wird durch sogenannte Adapter umgesetzt. Ziel dieser Abstraktion ist es eine einheitliche Programmierschnittstelle (API) zur Verfügung zu stellen, die in verschiedenen JavaScript-Umgebungen und Browsern gleich funktioniert.
+
+PouchDB wird mit Adaptern für die Browser-Datenbanken IndexedDB und WebSQL sowie einem Adapter für LevelDB ausgeliefert. Weitere Adapter für SQLite, den Localstorage oder eine In-Memory-Datenbank stehen als Plugins zur Verfügung \cite{pouch:adapters}.
+
+
+Bei dem in dieser Arbeit vorgestellten Technologiestack werden Apps im Browser von mobilen Geräten ausgeführt, deshalb soll der Einsatz von PouchDB im Browser genauer betrachtet werden.
+
+Im Browser nutzt PouchDB laut eigener Dokumentation vorzugsweise den IndexedDB-Adapter. Unterstützt der verwendete Browser das nicht, greift PouchDB automatisch auf den WebSQL-Adapter zurück \cite{pouch:adapters}. Die Datenmengen, die in den Browserdatenbanken IndexedDB und WebSQL abgelegt werden können, sind in mobilen Browsern begrenzt \cite{html5:quota}. Um diese Begrenzungen zu umgehen empfiehlt die PouchDB-Dokumentation die Verwendung einer SQLite-Datenbank mit dem entsprechenden Adapter. Eine SQLite-Datenbank kann laut Dokumentation auch den Entwicklungsprozess erleichtern, da SQLite-Datenbanken als .sqllite-Datei für Entwickler direkt zugänglich sind  \cite{pouch:adapters}.
+
+
+Codebeispiel: Adapter manuell festlegen
+var db = new PouchDB('myDB.db', {adapter: 'cordova-sqlite'});
+
+
+\subsection{Synchronisation}
+\label{Synchronisation}
+
 \begin{citeenv}
-  \begin{quotation}
-    "`Und hier als Einstieg ein tolles Zitat."' \cite{book:eckert}.
-  \end{quotation}
+	\begin{quotation}
+		"`The way I like to think about CouchDB is this: CouchDB is bad at everything, except syncing. And it turns out that's the most important feature you could ever ask for, for many types of software."' \cite{pouch:replication}.
+	\end{quotation}
 \end{citeenv}
 
-Es folgt eine \emph{hervorgehobener Text}. Akronyme -- wie zum Beispiel \acr{BLAUNDBLUB} können natürlich auch komfortabel eingepflegt werden. Eine Fußnote\footnote{"`[\ldots] a protocol useful in determining the current status of a digital certificate without requiring Certificate Revocation Lists"' \cite{tech:rfc6960}.} wird mit backslash footnote eingefügt.
-
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-
-\paragraph{Erster Absatz}
-\label{par:Usecase 1}
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-
-\paragraph{Zweiter Absatz}
-\label{par:Usecase 2}
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
 
 \chapter{Verwendeter Technologiestack}
 \label{chap:Technologien}

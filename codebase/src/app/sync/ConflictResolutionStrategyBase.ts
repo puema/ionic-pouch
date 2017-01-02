@@ -1,7 +1,6 @@
 import {IConflictResolutionStrategy} from "./IConflictResolutionStrategy";
 import {Inject} from "@angular/core";
-import {IDatabaseService} from "../data/IDatabaseServie";
-import {Article} from "../data/Article";
+import {IDatabaseService} from "../data/pouch-db.service";
 
 export abstract class ConflictResolutionStrategyBase implements IConflictResolutionStrategy {
 
@@ -12,8 +11,7 @@ export abstract class ConflictResolutionStrategyBase implements IConflictResolut
   }
 
   public resolveFor(id: string) {
-    var article: Article;
-    article = this._database.getWithConflicts(id).then((article) => {
+    this._database.getWithConflicts(id).then((article) => {
       return article;
     });
   }
