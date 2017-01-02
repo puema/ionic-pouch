@@ -8,12 +8,22 @@
       </ion-item>
     </ion-buttons>
   </ion-navbar>
+  <ion-toolbar padding>
+    <ion-input placeholder="Add" [(ngModel)]="name"></ion-input>
+    <ion-buttons end>
+      <button ion-button icon-only clear item-right (click)="onPut()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
 
-
   <ion-list>
+    <ion-list-header>
+      To do
+    </ion-list-header>
     <ion-item *ngFor="let item of dbEntries">
       <p>{{item.doc.value}}</p>
       <button ion-button icon-only clear item-right (click)="onDelete(item.doc)">
@@ -21,11 +31,5 @@
       </button>
     </ion-item>
   </ion-list>
-
-  <input [(ngModel)]="name"/>
-
-  <button ion-button (click)='onPut()'>
-    Add
-  </button>
 
 </ion-content>
