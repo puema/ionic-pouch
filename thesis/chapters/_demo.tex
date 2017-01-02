@@ -28,9 +28,11 @@ Laut eigener Dokumentation ist PouchDB keine eigenständige Datenbank. Stattdess
 
 PouchDB wird mit Adaptern für die Browser-Datenbanken IndexedDB und WebSQL sowie einem Adapter für LevelDB ausgeliefert. Weitere Adapter für SQLite, den Localstorage oder eine In-Memory-Datenbank stehen als Plugins zur Verfügung \cite{pouch:adapters}.
 
-Verfügbarkeit einzelner Datenbanken auf verschiedenen Betriebssystemen
 
-Größenbeschränkung der Browser-Datenbanken auf verschiedenen Betriebssystemen
+Bei dem in dieser Arbeit vorgestellten Technologiestack werden Apps im Browser von mobilen Geräten ausgeführt, deshalb soll der Einsatz von PouchDB im Browser genauer betrachtet werden.
+
+Im Browser nutzt PouchDB laut eigener Dokumentation vorzugsweise den IndexedDB-Adapter. Unterstützt der verwendete Browser das nicht, greift PouchDB automatisch auf den WebSQL-Adapter zurück \cite{pouch:adapters}. Die Datenmengen, die in den Browserdatenbanken IndexedDB und WebSQL abgelegt werden können, sind in mobilen Browsern begrenzt \cite{html5:quota}. Um diese Begrenzungen zu umgehen empfiehlt die PouchDB-Dokumentation die Verwendung einer SQLite-Datenbank mit dem entsprechenden Adapter. Eine SQLite-Datenbank kann laut Dokumentation auch den Entwicklungsprozess erleichtern, da SQLite-Datenbanken als .sqllite-Datei für Entwickler direkt zugänglich sind  \cite{pouch:adapters}.
+
 
 Codebeispiel: Adapter manuell festlegen
 var db = new PouchDB('myDB.db', {adapter: 'cordova-sqlite'});
