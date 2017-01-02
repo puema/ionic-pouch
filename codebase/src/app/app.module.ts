@@ -7,6 +7,7 @@ import {HomePage} from '../pages/home/home';
 import {TabsPage} from '../pages/tabs/tabs';
 import {PouchDbService} from "./data/pouchDb.service";
 import {GuidService} from "./guid/GuidService";
+import {LastWinsConflictResolution} from "./sync/LastWinsConflictResolution";
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import {GuidService} from "./guid/GuidService";
   providers: [
     {provide: "IDatabaseService", useClass: PouchDbService},
     {provide: "IGuidService", useClass: GuidService},
+    {provide: "IConflictResolutionStrategy", useClass: LastWinsConflictResolution},
   ]
 })
 export class AppModule {}

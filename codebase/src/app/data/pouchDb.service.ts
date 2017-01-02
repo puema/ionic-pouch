@@ -29,6 +29,14 @@ export class PouchDbService implements IDatabaseService {
     return this.pouchDb.put(article);
   }
 
+  getByRev(id: string, rev: string): Promise<Article> {
+    return this.pouchDb.get(id, {rev: rev});
+  }
+
+  getWithConflicts(id: string): Promise<Article> {
+    return this.pouchDb.get(id, {conflicts: true});
+  }
+
   getAll(): Promise<AllDocsResponse<Article>> {
     return this.pouchDb.allDocs({
       include_docs: true

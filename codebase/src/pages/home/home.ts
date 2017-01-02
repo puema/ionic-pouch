@@ -5,6 +5,7 @@ import {IGuidService} from "../../app/guid/IGuidService";
 import SyncEventEmitter = PouchDB.SyncEventEmitter;
 import {ArticleDisplayContainer} from "../../app/data/ArticleDisplayContainer";
 import { ToastController } from 'ionic-angular';
+import {IConflictResolutionStrategy} from "../../app/sync/IConflictResolutionStrategy";
 
 @Component({
   selector: 'page-home',
@@ -15,6 +16,7 @@ export class HomePage {
 
   constructor(@Inject("IDatabaseService") private pouchDb: IDatabaseService,
               @Inject("IGuidService") private guidService: IGuidService,
+              @Inject("IConflictResolutionStrategy") private conflictResolver: IConflictResolutionStrategy,
               private toastCtrl: ToastController) {
 
     this.dbEntries = new Array<ArticleDisplayContainer>();
