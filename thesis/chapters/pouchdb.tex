@@ -4,7 +4,7 @@
 \section{Adapter}
 \label{Adapter}
 
-Laut eigener Dokumentation ist PouchDB keine eigenständige Datenbank. Stattdessen versteht sich PouchDB als Datenbankabstraktionsschicht und nutzt im Hintergrund andere Datenbanken. Dieser Zugriff auf andere Datenbanken wird durch sogenannte Adapter umgesetzt. Ziel dieser Abstraktion ist es eine einheitliche Programmierschnittstelle (API) zur Verfügung zu stellen, die in verschiedenen JavaScript-Umgebungen und Browsern gleich funktioniert.
+Laut eigener Dokumentation ist PouchDB keine eigenständige Datenbank. Stattdessen versteht sich PouchDB als Datenbankabstraktionsschicht und nutzt im Hintergrund andere Datenbanken. Der Zugriff auf diese Datenbanken wird durch sogenannte Adapter umgesetzt. Ziel dieser Abstraktion ist es eine einheitliche Programmierschnittstelle (API) zur Verfügung zu stellen, die in verschiedenen JavaScript-Umgebungen und Browsern gleich funktioniert.
 
 PouchDB wird mit Adaptern für die Browser-Datenbanken IndexedDB und WebSQL sowie einem Adapter für LevelDB ausgeliefert. Weitere Adapter für SQLite, den Localstorage oder eine In-Memory-Datenbank stehen als Plugins zur Verfügung \cite{pouch:adapters}.
 
@@ -18,6 +18,13 @@ Codebeispiel: Adapter manuell festlegen
 var db = new PouchDB('myDB.db', {adapter: 'cordova-sqlite'});
 
 
+\section{API}
+\label{API}
+PouchDB kann als JavaScript-Implementierung von CouchDB angesehen werden. Das selbst erklärte Ziel von PouchDB ist es die CouchDB-API im Browser und in Node.js zu emulieren \cite{pouch:intro}. 
+
+Die API von PouchDB ist laut eigener Dokumentation asynchron. Sie kann über Callbacks, Promises oder async-Funktionen angesprochen werden \cite{pouch:api}.
+
+
 \section{Synchronisation}
 \label{Synchronisation}
 
@@ -26,12 +33,3 @@ var db = new PouchDB('myDB.db', {adapter: 'cordova-sqlite'});
 		"`The way I like to think about CouchDB is this: CouchDB is bad at everything, except syncing. And it turns out that's the most important feature you could ever ask for, for many types of software."' \cite{pouch:replication}.
 	\end{quotation}
 \end{citeenv}
-
-
-
-
-
-
-
-
-
