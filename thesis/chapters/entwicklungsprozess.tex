@@ -13,8 +13,8 @@ Ein erstelltes Projekt kann mit Hilfe des serve-Kommandos im Standard-Browser au
 
 Codeausschnitt: ionic serve \cite{ionic:cli}
 
-Erklärung warum Testen mit ionic serve nicht ausreichend ist \cite{raboy:serve}.
+Nic Raboy nennt in einem Blogeintrag zwei Gründe weshalb es nicht ausreicht Ionic Apps mit dem serve-Kommando im Browser zu testen. Einerseits kann nativer Code, zum Beispiel Cordova-Plugins nicht im Browser ausgeführt werden. Dementsprechend können Funktionalitäten, die auf Cordova-Plugins zurückgreifen, im Browser getestet werden. Andererseits dient Ionic zum Erstellen von mobilen Apps, darum sollte man sie auch als solche auf einem entsprechenden Gerät und nicht nur im Browser testen \cite{raboy:serve}.
 
-Das run-Kommando ermöglicht es dem Entwickler Ionic-Apps für eine spezielle Plattform zu bauen und auf einem angeschlossenen mobilen Gerät auszuführen. Voraussetzung hierfür ist, dass das USB-Debugging aktiviert ist. Auch bei diesem Kommando gibt es die Option, die App bei Änderungen automatisch zu aktualisieren \cite{ionic:run}.
+Zu diesem Zweck existiert das run-Kommando. Es ermöglicht es dem Entwickler Ionic-Apps für eine spezielle Plattform zu bauen und auf einem angeschlossenen mobilen Gerät auszuführen. Voraussetzung hierfür ist, dass das USB-Debugging aktiviert ist. Auch bei diesem Kommando gibt es die Option, die App bei Änderungen automatisch zu aktualisieren \cite{ionic:run}.
 
-Codeausschnitt: ionic run android \cite{ionic:run}
+Codeausschnitt: ionic run android
