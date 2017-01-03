@@ -1,2 +1,20 @@
 \chapter{Entwicklungsprozess}
 \label{Entwicklungsprozess}
+
+\section{Ionic}
+\label{Ionic}
+Für die Entwicklung mit Ionic steht eine eigene Kommandozeilenschnittstelle (CLI) bereit. Diese kann über den Node Package Manager npm installiert werden \cite{ionic:cli}. Die Ionic-CLI gibt manche Kommandos, wie zum Beispiel das build-Kommando an die darunterliegende Cordova-CLI weiter \cite{ionic:build}.
+
+Mit Hilfe des start-Kommandos können neue Ionic-Projekte erstellt werden.
+
+Codeausschnitt: ionic start myAwesomeApp --v2 \cite{ionic:cli}
+
+Ein erstelltes Projekt kann mit Hilfe des serve-Kommandos im Standard-Browser ausgeführt und getestet werden. Es stehen Optionen zur Verfügung, um bei Änderungen die App neu zu transpilieren und den Browser zu aktualisieren oder die App in einem anderen Browser zu starten \cite{ionic:serve}.
+
+Codeausschnitt: ionic serve \cite{ionic:cli}
+
+Erklärung warum Testen mit ionic serve nicht ausreichend ist \cite{raboy:serve}.
+
+Das run-Kommando ermöglicht es dem Entwickler Ionic-Apps für eine spezielle Plattform zu bauen und auf einem angeschlossenen mobilen Gerät auszuführen. Voraussetzung hierfür ist, dass das USB-Debugging aktiviert ist. Auch bei diesem Kommando gibt es die Option, die App bei Änderungen automatisch zu aktualisieren \cite{ionic:run}.
+
+Codeausschnitt: ionic run android \cite{ionic:run}
