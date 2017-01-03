@@ -15,7 +15,7 @@
     listof=flat,%        improved list of tables
     numbers=noenddot
   ]{scrbook}
-  
+
 \usepackage{scrhack}
 \usepackage[utf8]{inputenc}
 \usepackage{makeidx}
@@ -43,7 +43,7 @@
 \usepackage{microtype}  % optischer Randausgleich etc.
 \usepackage{url}
 \usepackage[backend=bibtex,style=alphabetic]{biblatex}
-% temoräry fix: siehe auch -->  
+% temorary fix: siehe auch -->
 %http://tex.stackexchange.com/questions/311426/bibliography-error-use-of-blxbblverbaddi-doesnt-match-its-definition-ve
 \makeatletter
 \def\blx@maxline{77}
@@ -65,6 +65,7 @@
 \usepackage[colorlinks=false,pdfborder={0 0 0},breaklinks=true]{hyperref}
 \usepackage{tcolorbox}
 \usepackage{listings}
+\usepackage{upquote}
 \usepackage{todonotes}
 \usepackage{sourcecodepro}
 
@@ -113,11 +114,11 @@
 \newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
 \newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
 
-\lstdefinelanguage{JavaScript}{
+\lstdefinelanguage{TypeScript}{
   basicstyle=\ttfamily,
-  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break, class, export, boolean, throw, implements, import, from, this},
   keywordstyle=\color{keywords}\bfseries,
-  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywords={},
   ndkeywordstyle=\color{darkgray}\bfseries,
   identifierstyle=\color{black},
   sensitive=false,
@@ -125,8 +126,14 @@
   morecomment=[s]{/*}{*/},
   commentstyle=\color{comments}\ttfamily,
   stringstyle=\color{strings}\ttfamily,
+  showstringspaces=false,
   morestring=[b]',
-  morestring=[b]"
+  morestring=[b]",
+  morestring=[b]`,
+%  numbers=left,
+%  numberstyle=\tiny\color{black},
+%  stepnumber=1,
+%  numbersep=10pt,
 }
 
 \newtcolorbox{borderbox}[2][]{
@@ -187,7 +194,7 @@
 %---------------- end new commands ----------------%
 
 %--------------- new environments ----------------------%
-%depricated, use simplebox istead
+%deprecated, use simplebox istead
 \newenvironment{citeenv}{%
   \def\FrameCommand{%
     \hspace{1pt}%
