@@ -1,18 +1,29 @@
 \chapter{Entwicklungsprozess mit Ionic}
 \label{Entwicklungsprozess}
 
-Für die Entwicklung mit Ionic steht eine eigene Kommandozeilenschnittstelle (CLI) bereit. Diese kann über den Node Package Manager npm installiert werden \cite{ionic:cli}. Die Ionic-CLI gibt manche Kommandos, wie zum Beispiel das build-Kommando an die darunterliegende Cordova-CLI weiter \cite{ionic:build}.
+\section{Erstellen und Ausführen}
 
-Mit Hilfe des start-Kommandos können neue Ionic-Projekte erstellt werden.
+Für die Entwicklung mit Ionic steht eine eigene Kommandozeilenschnittstelle (CLI) bereit. Diese kann über den Node Package Manager npm installiert werden \cite{ionic:cli}. Die Ionic-CLI gibt manche Kommandos, wie zum Beispiel das \texttt{build}-Kommando an die darunterliegende Cordova-CLI weiter \cite{ionic:build}.
 
-Codeausschnitt: ionic start myAwesomeApp --v2 \cite{ionic:cli}
+Mit Hilfe des \texttt{start}-Kommandos können neue Ionic-Projekte erstellt werden. Folgender Codeausschnitt zeigt, wie mit der Ionic-CLI ein neues Projekt Ionic2-Projekt mit dem Namen myAwesomeApp erstellt werden kann \cite{ionic:cli}.
+\begin{codebox}
+\begin{lstlisting}[style=typescript]
+$ ionic start myAwesomeApp --v2
+\end{lstlisting}
+\end{codebox}
 
-Ein erstelltes Projekt kann mit Hilfe des serve-Kommandos im Standard-Browser ausgeführt und getestet werden. Es stehen Optionen zur Verfügung, um bei Änderungen die App neu zu transpilieren und den Browser zu aktualisieren oder die App in einem anderen Browser zu starten \cite{ionic:serve}.
+Ein erstelltes Projekt kann mit Hilfe des \texttt{serve}-Kommandos im Standard-Browser ausgeführt und getestet werden. Es stehen Optionen zur Verfügung, um bei Änderungen die App neu zu transpilieren und den Browser zu aktualisieren oder die App in einem anderen Browser zu starten \cite{ionic:serve}. Der folgende Codeausschnitt zeigt die Verwendung des \texttt{serve}-Kommandos \cite{ionic:cli}:
+\begin{codebox}
+\begin{lstlisting}[style=typescript]
+$ ionic serve
+\end{lstlisting}
+\end{codebox}
 
-Codeausschnitt: ionic serve \cite{ionic:cli}
+Nic Raboy nennt in einem Blogeintrag zwei Gründe weshalb es nicht ausreicht Ionic Apps mit dem \texttt{serve}-Kommando im Browser zu testen. Einerseits kann nativer Code, zum Beispiel Cordova-Plugins nicht im Browser ausgeführt werden. Dementsprechend können Funktionalitäten, die auf Cordova-Plugins zurückgreifen, im Browser getestet werden. Andererseits dient Ionic zum Erstellen von mobilen Apps, darum sollte man sie auch als solche auf einem entsprechenden Gerät und nicht nur im Browser testen \cite{raboy:serve}.
 
-Nic Raboy nennt in einem Blogeintrag zwei Gründe weshalb es nicht ausreicht Ionic Apps mit dem serve-Kommando im Browser zu testen. Einerseits kann nativer Code, zum Beispiel Cordova-Plugins nicht im Browser ausgeführt werden. Dementsprechend können Funktionalitäten, die auf Cordova-Plugins zurückgreifen, im Browser getestet werden. Andererseits dient Ionic zum Erstellen von mobilen Apps, darum sollte man sie auch als solche auf einem entsprechenden Gerät und nicht nur im Browser testen \cite{raboy:serve}.
-
-Zu diesem Zweck existiert das run-Kommando. Es ermöglicht es dem Entwickler Ionic-Apps für eine spezielle Plattform zu bauen und auf einem angeschlossenen mobilen Gerät auszuführen. Voraussetzung hierfür ist, dass das USB-Debugging aktiviert ist. Auch bei diesem Kommando gibt es die Option, die App bei Änderungen automatisch zu aktualisieren \cite{ionic:run}.
-
-Codeausschnitt: ionic run android
+Zu diesem Zweck existiert das \texttt{run}-Kommando. Es ermöglicht es dem Entwickler Ionic-Apps für eine spezielle Plattform zu bauen und auf einem angeschlossenen mobilen Gerät auszuführen. Voraussetzung hierfür ist, dass das USB-Debugging aktiviert ist. Auch bei diesem Kommando gibt es die Option, die App bei Änderungen automatisch zu aktualisieren \cite{ionic:run}. Um eine Ionic-App auf einem verbundenen Android-Gerät auszuführen kann das \texttt{run}-Kommando wie folgt genutzt werden:
+\begin{codebox}
+\begin{lstlisting}[style=typescript]
+$ ionic run android
+\end{lstlisting}
+\end{codebox}
