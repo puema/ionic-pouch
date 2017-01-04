@@ -117,25 +117,30 @@
 \newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
 
 \lstdefinelanguage{TypeScript}{
-  basicstyle=\ttfamily,
   keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break, class, export, boolean, throw, implements, import, from, this},
-  keywordstyle=\color{keywords}\bfseries,
   ndkeywords={selector, template, styles},
-  ndkeywordstyle=\color{ndkeywords}\bfseries,
-  identifierstyle=\color{black},
   sensitive=false,
   comment=[l]{//},
   morecomment=[s]{/*}{*/},
-  commentstyle=\color{comments}\ttfamily,
-  stringstyle=\color{strings}\bfseries,
   showstringspaces=false,
   morestring=[b]',
   morestring=[b]",
-  morestring=[b]`,
-%  numbers=left,
-%  numberstyle=\tiny\color{black},
-%  stepnumber=1,
-%  numbersep=10pt,
+  morestring=[b]`
+}
+
+\lstdefinestyle{typescript}{
+  language=TypeScript,
+  basicstyle=\ttfamily,
+  keywordstyle=\color{keywords}\bfseries,
+  ndkeywordstyle=\color{ndkeywords}\bfseries,
+  identifierstyle=\color{black},
+  commentstyle=\color{comments}\ttfamily,
+  stringstyle=\color{strings}\bfseries,
+  literate={`}{{\`{}}}1
+  %  numbers=left,
+  %  numberstyle=\tiny\color{black},
+  %  stepnumber=1,
+  %  numbersep=10pt,
 }
 
 \newtcolorbox{borderbox}[2][]{
