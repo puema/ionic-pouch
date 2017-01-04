@@ -36,13 +36,16 @@ Diese \texttt{HelloWorld}-Komponente könnte dann in einer Eltern-Komponente mit
 eingebunden werden.
 
 \section{Cordova}
+Um mit Angular und den Standard-Webtechnologien HTML5, CSS und JavaScript eine mobile App programmieren zu können, bedarf es einer Technologie, um Webanwendungen in native, mobile Apps zu verpacken. Laut Shotts ermöglicht das Open-Source-Framework Cordova genau das. 
 
-Cordova ist eine Open-Source-Framework für die Entwicklung mobiler Applikationen mit den Standard Webtechnologien HTML5, CSS und JavaScript (vgl. \cite{cordova}).
+Die so entstehende native App besteht, wie in Abbildung \ref{fig:cordova} zu sehen, aus einem WebView-Element, also einem Browserfenster, das die vorher erwähnte Webanwendung im Vollbild anzeigt. Über das WebView-Element können, wie in einem herkömmlichen Browser, HTML- und CSS-Dateien dargestellt und JavaScript-Code ausgeführt werden. Das WebView greift auf den Standardbrowser des Betriebssystems zurück und erlaubt es dem Benutzer mit der App zu interagieren.
+
+Cordova stellt darüber hinaus über eine JavaScript-Programmierschnittstelle Plug-Ins zur Verfügung, um auf die darunterliegende Plattform zuzugreifen. Diese Plug-Ins teilen sich in Core Plug-Ins und Drittanbieter Plug-Ins auf. Core Plug-Ins werden vom Cordova Team zur Verfügung gestellt und erlauben zum Beispiel den Zugriff auf die Kamera oder das Dateisystem des Gerätes. Die Funktionalität von Cordova kann durch selbst entwickelte oder Drittanbieter-Plug-Ins zusätzlich erweitert werden. Als mögliche Beispiele für Drittanbieter-Plug-Ins nennt Shotts einen Barcode Scanner oder ein Plug-In, um Inhalte über soziale Netzwerke zu teilen \cite{shotts:phonegap}.
 
 \begin{figure}[htb]
 \centering
 \caption{Cordova Architektur}
-\label{fig:netzabdeckung}
+\label{fig:cordova}
 \includegraphics[width=0.8\textwidth]{\figdir/cordova.png}
 \end{figure}
 
