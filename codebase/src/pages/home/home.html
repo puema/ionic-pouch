@@ -1,12 +1,6 @@
 <ion-header>
   <ion-navbar>
     <ion-title>Home</ion-title>
-    <ion-buttons end>
-      <ion-item ngClass="navbarToggle">
-        <ion-label> Sync</ion-label>
-        <ion-toggle #toggle checked="false" (ionChange)="onToggleSync(toggle.checked)"></ion-toggle>
-      </ion-item>
-    </ion-buttons>
   </ion-navbar>
   <ion-toolbar padding>
     <ion-input placeholder="Add Entry" [(ngModel)]="name"></ion-input>
@@ -19,11 +13,7 @@
 </ion-header>
 
 <ion-content padding>
-
   <ion-list>
-    <ion-list-header>
-      To do
-    </ion-list-header>
     <ion-item *ngFor="let item of dbEntries">
       <p *ngIf="!item.editMode">{{item.article.value}}</p>
       <ion-input *ngIf="item.editMode" [(ngModel)]="item.article.value"></ion-input>
@@ -40,5 +30,13 @@
       </button>
     </ion-item>
   </ion-list>
-
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <p>Synchronization</p>
+    <ion-buttons end>
+      <ion-toggle #toggle checked="false" (ionChange)="onToggleSync(toggle.checked)"></ion-toggle>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
