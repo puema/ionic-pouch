@@ -36,7 +36,7 @@ Diese \texttt{HelloWorld}-Komponente könnte dann in einer Eltern-Komponente mit
 eingebunden werden.
 
 \section{Cordova}
-Um mit Angular und den Standard-Webtechnologien HTML5, CSS und JavaScript eine mobile App programmieren zu können, bedarf es einer Technologie, um Webanwendungen in native, mobile Apps zu verpacken. Laut Shotts ermöglicht das Open-Source-Framework Cordova genau das. 
+Um mit den Standard-Webtechnologien HTML5, CSS und JavaScript eine offline-fähige mobile App entwickeln zu können, bedarf es einer Technologie, um Webanwendungen in native, mobile Apps zu verpacken. Laut Shotts ermöglicht das Open-Source-Framework Cordova genau das \cite{shotts:phonegap}.
 
 Die so entstehende native App besteht, wie in Abbildung \ref{fig:cordova} zu sehen, aus einem WebView-Element, also einem Browserfenster, das die vorher erwähnte Webanwendung im Vollbild anzeigt. Über das WebView-Element können, wie in einem herkömmlichen Browser, HTML- und CSS-Dateien dargestellt und JavaScript-Code ausgeführt werden. Das WebView greift auf den Standardbrowser des Betriebssystems zurück und erlaubt es dem Benutzer mit der App zu interagieren.
 
@@ -44,21 +44,47 @@ Cordova stellt darüber hinaus über eine JavaScript-Programmierschnittstelle Pl
 
 \begin{figure}[htb]
 \centering
-\caption{Cordova Architektur}
+\caption{Cordova Architektur \cite{cordova}}
 \label{fig:cordova}
 \includegraphics[width=0.8\textwidth]{\figdir/cordova.png}
 \end{figure}
 
 \section{Ionic}
 
-Lässt sich Angular und Cordova miteinander verbinden, um die Vorteile von beiden Frameworks zu nutzen? Ja. Das Framework
+Lässt sich Angular und Cordova miteinander verbinden, um die Vorteile von beiden Frameworks zu nutzen? Die Antwort ist ja. Das Open-Source-Framework Ionic bietet genau diese Verbindung zwischen Angular und Cordova. Hevery, der Schöpfer von Angular, beschreibt Ionic mit folgenden Worten:
+
+\begin{citeenv}
+	``Ionic is a shining example of a high-quality framework that takes advantage of Angular's power and flexibility, enabling developers to build production-ready mobile apps and Progressive Web Apps, in a fraction of the time.'' \cite{ionic:qutation}
+\end{citeenv}
 
 
+Mit Ionic kann eine Angular-Applikation sehr komfortabel plattformübergreifend in eine mobile Applikationen verwandelt werden. Es wird Ionic für Angular 1 und 2 angeboten.
 
+Ionic bietet über die Funktionalität von Cordova hinaus fertige Angular-Komponenten an, die sich der Zielplattform entsprechend anpassen. Dadurch bekommt der Nutzer der mobilen Applikation das gewohnte Look-and-Feel des verwendeten Betriebssystems. Von Ionic werden die Plattformen iOS, Android und Windows Phone unterstützt. Es sind Komponenten wie \texttt{Header}, \texttt{Tabs} oder \texttt{List} verfügbar, die wie in Kapitel \ref{Verwendete Technologien} anhand der \texttt{HelloWorld}-Komponente veranschaulicht, im HTML-Template verwendet werden können. In Abbildung \ref{fig:loog-and-feel} wird am Beispiel von der Komponente \texttt{Action Sheet} das unterschiedliche Layout auf den unterstützten Plattformen illustriert.
 
+\begin{figure}[htb]
+\centering
+\caption{Look-and-feel von Ionic auf verschiedenen Plattformen am Beispiel von Action Sheets}
+\label{fig:loog-and-feel}
+\begin{subfigure}{0.32\textwidth}
+\includegraphics[width=\textwidth]{\figdir/ios}
+\caption{iOS}
+\end{subfigure}
+\begin{subfigure}{0.32\textwidth}
+\includegraphics[height=8.4cm]{\figdir/android}
+\caption{Android}
+\end{subfigure}
+\begin{subfigure}{0.32\textwidth}
+\includegraphics[width=\textwidth]{\figdir/wp}
+\caption{Windows Phone}
+\end{subfigure}
+\end{figure}
 
+Es wird deutlich, dass auch unterschiedliche Symbole verwendet werden. Dies passiert bei Verwendung von Ionic-Icons, von denen hunderte verfügbar sind, alles automatisch im Hintergrund.
 
+Weiterhin können die Schnittstellen und Plugins von Cordova in TypeScript typsicher verwendet werden, sodass zum Beispiel per TypeScript auf die Kamera zugegriffen werden kann.
 
+Insgesamt wurden bis Januar 2017 3,1 Millionen mobile Applikationen mit Ionic entwickelt. Auf den Entwicklungsprozess wird im nächsten Kapitel näher eingegangen.
 
 
 
