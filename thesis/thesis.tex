@@ -80,9 +80,11 @@
 \colorlet{background}{primary!20}%
 
 %Code
-\definecolor{strings}{rgb}{0.6,0,0} % for strings
+\definecolor{strings}{HTML}{008000} % for strings
 \definecolor{comments}{rgb}{0.25,0.5,0.35} % comments
-\colorlet{keywords}{primary} % keywords
+%\colorlet{keywords}{primary} % keywords
+\definecolor{keywords}{HTML}{000080} % keywords
+\definecolor{ndkeywords}{HTML}{660E7A} % keywords
 \definecolor{javadoc}{rgb}{0.25,0.35,0.75} % javadoc
 \definecolor{codebackground}{HTML}{F8F8F8} %
 \colorlet{codeborder}{gray} %
@@ -118,14 +120,14 @@
   basicstyle=\ttfamily,
   keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break, class, export, boolean, throw, implements, import, from, this},
   keywordstyle=\color{keywords}\bfseries,
-  ndkeywords={},
-  ndkeywordstyle=\color{darkgray}\bfseries,
+  ndkeywords={selector, template, styles},
+  ndkeywordstyle=\color{ndkeywords}\bfseries,
   identifierstyle=\color{black},
   sensitive=false,
   comment=[l]{//},
   morecomment=[s]{/*}{*/},
   commentstyle=\color{comments}\ttfamily,
-  stringstyle=\color{strings}\ttfamily,
+  stringstyle=\color{strings}\bfseries,
   showstringspaces=false,
   morestring=[b]',
   morestring=[b]",
