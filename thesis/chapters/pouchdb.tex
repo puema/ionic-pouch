@@ -11,11 +11,22 @@ PouchDB wird mit Adaptern für die Browser-Datenbanken IndexedDB und WebSQL sowi
 
 Bei dem in dieser Arbeit vorgestellten Technologiestack werden Apps im Browser von mobilen Geräten ausgeführt, deshalb soll der Einsatz von PouchDB im Browser genauer betrachtet werden.
 
-Im Browser nutzt PouchDB laut eigener Dokumentation vorzugsweise den IndexedDB-Adapter. Unterstützt der verwendete Browser das nicht, greift PouchDB automatisch auf den WebSQL-Adapter zurück \cite{pouch:adapters}. Die Datenmengen, die in den Browserdatenbanken IndexedDB und WebSQL abgelegt werden können, sind in mobilen Browsern begrenzt \cite{html5:quota}. Um diese Begrenzungen zu umgehen empfiehlt die PouchDB-Dokumentation die Verwendung einer SQLite-Datenbank mit dem entsprechenden Adapter. Eine SQLite-Datenbank kann laut Dokumentation auch den Entwicklungsprozess erleichtern, da SQLite-Datenbanken als .sqllite-Datei für Entwickler direkt zugänglich sind  \cite{pouch:adapters}.
+Erzeugt man, wie im folgenden Codeausschnitt beschrieben, eine neue PouchDB-Datenbank, so  nutzt PouchDB im Browser vorzugsweise den IndexedDB-Adapter. Unterstützt der verwendete Browser das nicht, greift PouchDB automatisch auf den WebSQL-Adapter zurück \cite{pouch:adapters}.
+\begin{codebox}
+\begin{lstlisting}[style=typescript]
+var pouch = new PouchDB('myDB');
+\end{lstlisting}
+\end{codebox}
 
 
-Codebeispiel: Adapter manuell festlegen
-var db = new PouchDB('myDB.db', {adapter: 'cordova-sqlite'});
+Die Datenmengen, die in den Browserdatenbanken IndexedDB und WebSQL abgelegt werden können, sind in mobilen Browsern begrenzt \cite{html5:quota}. Um diese Begrenzungen zu umgehen empfiehlt die PouchDB-Dokumentation die Verwendung einer SQLite-Datenbank mit dem entsprechenden Adapter. Eine SQLite-Datenbank kann laut Dokumentation auch den Entwicklungsprozess erleichtern, da SQLite-Datenbanken als .sqllite-Dateien für Entwickler direkt zugänglich sind \cite{pouch:adapters}.
+
+Im folgenden Codeausschnitt wird eine neue PouchDB-Datenbank mit dem Namen \texttt{db} erzeugt und manuell die Verwendung des SQLite-Adapter festgelegt \cite{pouch:adapters}.
+\begin{codebox}
+\begin{lstlisting}[style=typescript]
+var db = new PouchDB('db', {adapter: 'cordova-sqlite'});
+\end{lstlisting}
+\end{codebox}
 
 
 \section{API}
