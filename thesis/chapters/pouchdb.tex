@@ -40,7 +40,11 @@ Die API von PouchDB ist laut eigener Dokumentation asynchron. Sie kann über Cal
 \label{Synchronisation}
 
 \begin{citeenv}
-	\begin{quotation}
-		"`The way I like to think about CouchDB is this: CouchDB is bad at everything, except syncing. And it turns out that's the most important feature you could ever ask for, for many types of software."' \cite{pouch:replication}.
-	\end{quotation}
+\begin{quotation}
+"`The way I like to think about CouchDB is this: CouchDB is bad at everything, except syncing. And it turns out that's the most important feature you could ever ask for, for many types of software."' \cite{pouch:replication}.
+\end{quotation}
 \end{citeenv}
+
+\section{Integration in den Entwicklungsprozess}
+
+PouchDB wird nicht in TypeScript sondern in JavaScript entwickelt. Daher werden mit dem PouchDB-Paket keine TypeScript-Definitionsdateien ausgeliefert. Im DefinitlyTyped-Repository, das sich als Quelle für Definitionsdateien etabliert hat [Citation Needed], finden sich entsprechende Definitionsdateien, diese entsprechen aber nicht dem aktuellen Entwicklungsstand. Um eine nahtlose Integration in den in Kapitel \ref{Entwicklungsprozess} beschriebenen Entwicklungsprozess zu ermöglichen, mussten die bestehenden Definitionsdateien erweitert werden. 
