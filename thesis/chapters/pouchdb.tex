@@ -68,9 +68,9 @@ localDB.sync(remoteDB);
 \end{codebox}
 
 \subsection{Kontinuierliche Synchronisation}
-Die in den bisherigen Codebeispielen gezeigte Synchronisation zwischen zwei Datenbanken ist einmalig. PouchDB unterstützt darüber hinaus ein kontinuierliche Synchronisation, die bei jeder Änderung den Synchronisationsprozess von selbst anstößt. Dies ist in der API über die Option \texttt{live} umgesetzt.
+Die in den bisherigen Codebeispielen gezeigte Synchronisation zwischen zwei Datenbanken ist einmalig. PouchDB unterstützt darüber hinaus eine kontinuierliche Synchronisation, die bei jeder Änderung den Synchronisationsprozess automatisch anstößt. Dies ist in der API über die Option \texttt{live} umgesetzt.
 
-Zusätzlich kann mit der Option \texttt{retry} angegeben werden, dass bei einem Verbindungsabbruch versucht werden soll die Verbindung wiederherzustellen. Der folgenden Codeausschnitt zeigt die Verwendung der \texttt{live}- und der \texttt{retry}-Option \cite{pouch:replication}.
+Wie in der Motivation dieser Arbeit beschrieben, muss damit gerechnet werden, dass die Internetverbindung auf mobilen Geräten abreißen kann. Um dem entgegenzuwirken bietet die Synchronisation die Option \texttt{retry} an. Damit kann angegeben werden, dass bei einem Verbindungsabbruch versucht werden soll die Verbindung wiederherzustellen. Der folgenden Codeausschnitt zeigt die Verwendung der \texttt{live}- und der \texttt{retry}-Option \cite{pouch:replication}.
 \begin{codebox}
 \begin{lstlisting}[style=typescript]
 localDB.sync(remoteDB, {live: true, retry: true});
