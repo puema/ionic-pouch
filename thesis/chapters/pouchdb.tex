@@ -38,12 +38,61 @@ Die API von PouchDB ist laut eigener Dokumentation asynchron. Sie kann über Cal
 
 \section{Synchronisation}
 \label{Synchronisation}
-
 \begin{citeenv}
 \begin{quotation}
 "`The way I like to think about CouchDB is this: CouchDB is bad at everything, except syncing. And it turns out that's the most important feature you could ever ask for, for many types of software."' \cite{pouch:replication}.
 \end{quotation}
 \end{citeenv}
+
+Das Zitat, dass Jason Smith, einem Entwickler von CouchDB, zugeordnet wird, deutet an, dass Synchronisation eine wichtige Anforderung an viele verschiedene Arten von Software darstellt.
+
+PouchDB versucht diese Anforderung umzusetzen, in dem sie das CouchDB Replication Protocol implementiert. Dabei handelt es sich um ein in \cite{apache:replication} dokumentiertes Regelwerk, um zwischen Datenbanken, die dieses Regelwerk implementieren, Daten auszutauschen. Laut PouchDB-Dokumentation verwendet das CouchDB Replication Protocol dabei HTTP und eine REST-Schnittstelle zur Kommunikation zwischen den Datenbanken. Das ermöglicht es auch mit einem Browser oder einem REST-Client mit einer Datenbank, die das CouchDB Replication Protocol implementiert, zu kommunizieren \cite{pouch:intro}. Die technischen Details der Synchronisation werden in Kapitel \ref{Konfliktbehandlung} behandelt.
+
+
+\subsection{Umsetzung in der API}
+Die PouchDB-API unterscheidet zwischen der Replikation und der Synchronisation von Datenbanken. Als Replikation wird der unidirektionale Austausch von Daten bezeichnet. Dafür stellt die API die \texttt{replicate}-Methode zur Verfügung. Im folgenden Codebeispiel wird diese genutzt, um von einer lokale PouchDB zu einer entfernten PouchDB Daten zu replizieren \cite{pouch:replication}:
+\begin{codebox}
+\begin{lstlisting}[style=typescript]
+var localDB = new PouchDB('local');
+var remoteDB = new PouchDB('http://localhost:5984/remote');
+localDB.replicate.to(remoteDB);
+\end{lstlisting}
+\end{codebox}
+
+
+Bei der Synchronisation handelt es sich um einen bidirektionale Replikation. Hierfür steht die \texttt{sync}-Methode zur Verfügung. Sie kann wie folgt verwendet werden \cite{pouch:replication}:
+\begin{codebox}
+\begin{lstlisting}[style=typescript]
+localDB.sync(remoteDB);
+\end{lstlisting}
+\end{codebox}
+
+\subsection{Kontinuierliche Synchronisation}
+Die in den bisherigen Codebeispielen gezeigte Synchronisation zwischen zwei Datenbanken ist einmalig. PouchDB unterstützt darüber hinaus ein kontinuierliche Synchronisation, die bei jeder Änderung den Synchronisationsprozess von selbst anstößt. Dies ist in der API über die Option \texttt{live} umgesetzt.
+
+Zusätzlich kann mit der Option \texttt{retry} angegeben werden, dass bei einem Verbindungsabbruch versucht werden soll die Verbindung wiederherzustellen. Der folgenden Codeausschnitt zeigt die Verwendung der \texttt{live}- und der \texttt{retry}-Option \cite{pouch:replication}.
+\begin{codebox}
+\begin{lstlisting}[style=typescript]
+localDB.sync(remoteDB, {live: true, retry: true});
+\end{lstlisting}
+\end{codebox}
+
+Über die Option \texttt{back\_off\_function} kann konfiguriert werden in welchem Intervall PouchDB nach einem Verbindungsabbruch versucht die Verbindung wieder aufzubauen. Die Dokumentation demonstriert dies an folgendem Codebeispiel \cite{pouch:api}:
+
+\begin{codebox}
+\begin{lstlisting}[style=typescript]
+localDB.replicate.to(remoteDB, {
+  live: true,
+  retry: true,
+  back_off_function: function (delay) {
+    if (delay === 0) {
+      return 1000;
+    }
+    return delay * 3;
+  }
+});
+\end{lstlisting}
+\end{codebox}
 
 \section{Integration in den Entwicklungsprozess}
 
