@@ -42,15 +42,15 @@ Die API von PouchDB ist laut eigener Dokumentation asynchron. Sie kann über Cal
 \begin{quotation}
 "`The way I like to think about CouchDB is this: CouchDB is bad at everything, except syncing. And it turns out that's the most important feature you could ever ask for, for many types of software."' \cite{pouch:replication}.
 \end{quotation}
-pe\end{citeenv}
+\end{citeenv}
 
 Das Zitat, dass Jason Smith, einem Entwickler von CouchDB, zugeordnet wird, deutet an, dass Synchronisation eine wichtige Anforderung an viele verschiedene Arten von Software darstellt.
 
-PouchDB versucht diese Anforderung umzusetzen, in dem sie das CouchDB Replication Protocol implementiert. Dabei handelt es sich um ein in \cite{apache:replication} dokumentiertes Regelwerk, um zwischen Datenbanken, die dieses Regelwerk implementieren, Daten auszutauschen. Laut PouchDB-Dokumentation verwendet das CouchDB Replication Protocol dabei HTTP und eine REST-Schnittstelle zur Kommunikation zwischen den Datenbanken. Das ermöglicht es auch mit einem Browser oder einem REST-Client mit einer Datenbank, die das CouchDB Replication Protocol implementiert, zu kommunizieren \cite{pouch:intro}. Die technischen Details der Synchronisation werden in Kapitel \ref{Konfliktbehandlung} behandelt.
+PouchDB versucht diese Anforderung umzusetzen, indem sie das CouchDB Replication Protocol implementiert. Dabei handelt es sich um ein in \cite{apache:replication} dokumentiertes Regelwerk, um zwischen Datenbanken, die dieses Regelwerk implementieren, Daten auszutauschen. Laut PouchDB-Dokumentation verwendet das CouchDB Replication Protocol dabei HTTP und eine REST-Schnittstelle zur Kommunikation zwischen den Datenbanken. Das ermöglicht es auch mit einem Browser oder einem REST-Client mit einer Datenbank, die das CouchDB Replication Protocol implementiert, zu kommunizieren \cite{pouch:intro}. Die technischen Details der Synchronisation werden in Kapitel \ref{Konfliktbehandlung} behandelt.
 
 
 \subsection{Umsetzung in der API}
-Die PouchDB-API unterscheidet zwischen der Replikation und der Synchronisation von Datenbanken. Als Replikation wird der unidirektionale Austausch von Daten bezeichnet. Dafür stellt die API die \texttt{replicate}-Methode zur Verfügung. Im folgenden Codebeispiel wird diese genutzt, um von einer lokale PouchDB zu einer entfernten PouchDB Daten zu replizieren \cite{pouch:replication}:
+Die PouchDB-API unterscheidet zwischen der Replikation und der Synchronisation von Datenbanken. Als Replikation wird der unidirektionale Austausch von Daten bezeichnet. Dafür stellt die API die \texttt{replicate}-Methode zur Verfügung. Im folgenden Codebeispiel wird diese genutzt, um Daten von einer lokale PouchDB zu einer entfernten PouchDB zu replizieren \cite{pouch:replication}:
 \begin{codebox}
 \begin{lstlisting}[style=typescript]
 var localDB = new PouchDB('local');
@@ -68,7 +68,7 @@ localDB.sync(remoteDB);
 \end{codebox}
 
 \subsection{Kontinuierliche Synchronisation}
-Die in den bisherigen Codebeispielen gezeigte Synchronisation zwischen zwei Datenbanken ist einmalig. PouchDB unterstützt darüber hinaus eine kontinuierliche Synchronisation, die bei jeder Änderung den Synchronisationsprozess automatisch anstößt. Dies ist in der API über die Option \texttt{live} umgesetzt.
+Die bisherigen Codebeispiele zeigen die einmalige Synchronisation zweier Datenbanken. PouchDB unterstützt darüber hinaus eine kontinuierliche Synchronisation, die bei jeder Änderung den Synchronisationsprozess automatisch anstößt. Dies ist in der API über die Option \texttt{live} umgesetzt.
 
 Wie in der Motivation dieser Arbeit beschrieben, muss damit gerechnet werden, dass die Internetverbindung auf mobilen Geräten abreißen kann. Um dem entgegenzuwirken bietet die Synchronisation die Option \texttt{retry} an. Damit kann angegeben werden, dass bei einem Verbindungsabbruch versucht werden soll die Verbindung wiederherzustellen. Der folgenden Codeausschnitt zeigt die Verwendung der \texttt{live}- und der \texttt{retry}-Option \cite{pouch:replication}.
 \begin{codebox}
@@ -93,6 +93,8 @@ localDB.replicate.to(remoteDB, {
 });
 \end{lstlisting}
 \end{codebox}
+
+In diesem Beispiel wird 1000 Millisekunden nach einem Verbindungsabbruch versucht, die Verbindung wiederherzustellen. Gelingt das nicht wird die bisherige Wartezeit (\texttt{delay}) mit jedem weiteren gescheiterten Versuch mit dem Faktor 3 multipliziert, bevor ein erneuter Versuch stattfindet.
 
 \section{Integration in den Entwicklungsprozess}
 
