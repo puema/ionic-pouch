@@ -1,6 +1,8 @@
 export class Article {
   _id: string;
   _rev: string;
+  _conflicts: string[];
+  timestamp: Date;
   value: string;
 
 

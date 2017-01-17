@@ -47,8 +47,6 @@ export class HomePage {
   }
 
   onUpdate(container: ArticleDisplayContainer): void {
-    console.log(container);
-    console.log(container.article);
     this.pouchDb.put(container.article).then((result) => {
       this.presentToast("Entry updated.");
       container.editMode = false;
@@ -63,6 +61,8 @@ export class HomePage {
       for (let response of result.rows) {
         var container = new ArticleDisplayContainer(response.doc);
         this.dbEntries.push(container);
+
+        this.conflictResolver.checkForConflicts(response.doc);
       }
       this.presentToast("Sync successful.");
     }).catch(function (err) {

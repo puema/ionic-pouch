@@ -11,9 +11,9 @@ export interface IDatabaseService {
   changeEventEmitter: ChangeEventEmitter;
   put(article: Article): Promise<Response>;
   getByRev(id: string, rev: string): Promise<Article>;
-  getWithConflicts(id: string): Promise<Article>;
   getAll(): Promise<AllDocsResponse<Article>>;
-  delete(article: Article): Promise<Response>
+  delete(article: Article): Promise<Response>;
+  deleteByRev(id: string, rev: string): Promise<Response>;
   sync(): SyncEventEmitter;
 }
 
@@ -34,6 +34,7 @@ export class PouchDbService implements IDatabaseService {
   }
 
   put(article: Article): Promise<Response> {
+    article.timestamp = new Date();
     return this.pouchDb.put(article);
   }
 
@@ -41,18 +42,19 @@ export class PouchDbService implements IDatabaseService {
     return this.pouchDb.get(id, {rev: rev});
   }
 
-  getWithConflicts(id: string): Promise<Article> {
-    return this.pouchDb.get(id, {conflicts: true});
-  }
-
   getAll(): Promise<AllDocsResponse<Article>> {
     return this.pouchDb.allDocs({
-      include_docs: true
+      include_docs: true,
+      conflicts: true
     });
   }
 
   delete(article: Article): Promise<Response> {
     return this.pouchDb.remove(article);
+  }
+
+  deleteByRev(id: string, rev: string): Promise<Response> {
+    return this.pouchDb.remove(id, rev);
   }
 
   sync(): SyncEventEmitter {
