@@ -12,6 +12,8 @@ export abstract class ConflictResolutionStrategyBase implements IConflictResolut
     this._database = database;
   }
 
+  public abstract getName() : string;
+
   private resolveConflict(currentWinningArticle: Article, nextWinningArticle: Article, revisionsToDelete: Article[]) {
     currentWinningArticle.value = nextWinningArticle.value;
 

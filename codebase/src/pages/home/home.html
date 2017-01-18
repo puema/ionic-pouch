@@ -34,9 +34,18 @@
 
 <ion-footer>
   <ion-toolbar>
-    <p>Synchronization</p>
-    <ion-buttons end>
+
+    <ion-item right>
+      <ion-label>Synchronization</ion-label>
       <ion-toggle #toggle checked="false" (ionChange)="onToggleSync(toggle.checked)"></ion-toggle>
-    </ion-buttons>
+    </ion-item>
+
+    <ion-item right>
+      <ion-label>Conflict Resolution Strategy</ion-label>
+      <ion-select [(ngModel)]="selectedStrategy">
+        <ion-option *ngFor="let item of strategies" [value]="item">{{item.getName()}}</ion-option>
+      </ion-select>
+    </ion-item>
   </ion-toolbar>
+
 </ion-footer>

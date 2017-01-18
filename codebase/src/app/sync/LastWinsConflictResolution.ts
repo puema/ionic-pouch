@@ -12,6 +12,10 @@ export class LastWinsConflictResolution extends ConflictResolutionStrategyBase i
     super(database);
   }
 
+  public getName() : string {
+    return "Last Wins";
+  }
+
   protected evaluateConflictingArticles(revisions: Article[]): ConflictResolutionResult {
     let sortedArray : Article[] = revisions.sort((article1, article2) => article1.timestamp.valueOf() - article2.timestamp.valueOf());
 

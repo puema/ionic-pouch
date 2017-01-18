@@ -12,6 +12,10 @@ export class MergeConflictResolution extends ConflictResolutionStrategyBase impl
     super(database);
   }
 
+  public getName() : string {
+    return "Zusammenführen";
+  }
+
   protected evaluateConflictingArticles(revisions: Article[]): ConflictResolutionResult {
 
     console.log(revisions);

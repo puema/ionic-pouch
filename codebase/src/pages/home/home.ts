@@ -6,6 +6,7 @@ import SyncEventEmitter = PouchDB.SyncEventEmitter;
 import {ArticleDisplayContainer} from "../../app/data/ArticleDisplayContainer";
 import { ToastController } from 'ionic-angular';
 import {IConflictResolutionStrategy} from "../../app/sync/IConflictResolutionStrategy";
+import {ConflictResolutionStrategyFactory} from "../../app/sync/ConflictResolutionStrategyFactory";
 
 @Component({
   selector: 'page-home',
@@ -16,10 +17,12 @@ export class HomePage {
 
   constructor(@Inject("IDatabaseService") private pouchDb: IDatabaseService,
               @Inject("IGuidService") private guidService: IGuidService,
-              @Inject("IConflictResolutionStrategy") private conflictResolver: IConflictResolutionStrategy,
+              @Inject("ConflictResolutionStrategyFactory") private conflictResolverFactory: ConflictResolutionStrategyFactory,
               private toastCtrl: ToastController) {
 
     this.dbEntries = new Array<ArticleDisplayContainer>();
+    this.strategies = conflictResolverFactory.strategies;
+    this.selectedStrategy = this.strategies[0];
 
     this.onGetAll();
     this.pouchDb.changeEventEmitter.on('change', (change) => {
@@ -34,6 +37,8 @@ export class HomePage {
   public syncEventEmitter: SyncEventEmitter;
 
   public editMode: boolean;
+  public strategies: IConflictResolutionStrategy[];
+  public selectedStrategy: IConflictResolutionStrategy;
 
   onPut(): void {
     let guid = this.guidService.generateGuid();
@@ -62,7 +67,7 @@ export class HomePage {
         var container = new ArticleDisplayContainer(response.doc);
         this.dbEntries.push(container);
 
-        this.conflictResolver.checkForConflicts(response.doc);
+        this.selectedStrategy.checkForConflicts(response.doc);
       }
       this.presentToast("Sync successful.");
     }).catch(function (err) {
@@ -92,6 +97,10 @@ export class HomePage {
         console.log("Trying to call cancel on undefined syncEventEmitter");
       }
     }
+  }
+
+  festSelected(strategy): void {
+    console.log(strategy);
   }
 
   presentToast(message: string): void {
