@@ -37,12 +37,10 @@ Diese Standardeinstellung ist vor allem vor dem Hintergrund von 28.200 von Ranso
 CouchDB kennt zwei unterschiedliche Benutzerrollen:
 
 \begin{citeenv}
-	\begin{quotation}
-		\begin{itemize}
-			\item \textit{members}, who are allowed to read all documents and create and modify any document except for design documents.
-			\item \textit{admins}, who can read and write all types of documents, modify which users are members or admins, and set certain per-database configuration options.  \cite{couch:security}. (Hervorhebungen im Original)
-		\end{itemize}
-	\end{quotation}
+	\begin{itemize}
+		\item \textit{members}, who are allowed to read all documents and create and modify any document except for design documents.
+		\item \textit{admins}, who can read and write all types of documents, modify which users are members or admins, and set certain per-database configuration options.  \cite{couch:security}. (Hervorhebungen im Original)
+	\end{itemize}
 \end{citeenv}
 
 Damit lässt sich der unauthentifizierte Zugriff auf CouchDB-Datenbanken verhindern. Die Konfiguration erfolgt dabei mit JSON-Dokumenten in der \texttt{\_users}-Datenbank des Servers \cite{couch:security}. Benutzerrollen für eine Datenbank können in einem jeweiligen Dokument namens \texttt{\_security} verwaltet werden. Dies legt eine Architektur mit einer eigenen Datenbank pro Benutzer nahe.
