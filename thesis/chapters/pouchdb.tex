@@ -97,5 +97,8 @@ localDB.replicate.to(remoteDB, {
 In diesem Beispiel wird 1000 Millisekunden nach einem Verbindungsabbruch versucht, die Verbindung wiederherzustellen. Gelingt das nicht wird die bisherige Wartezeit (\texttt{delay}) mit jedem weiteren gescheiterten Versuch mit dem Faktor 3 multipliziert, bevor ein erneuter Versuch stattfindet.
 
 \section{Integration in den Entwicklungsprozess}
+PouchDB integriert sich gut in den Entwicklungsprozess: Über die Entwicklertools des Browsers, zum Beispiel Google Chrome kann der Inhalt der IndexedDB- oder der WebSQL-Datenbank eingesehen werden \cite{google:chromestorage}, um über den entsprechenden Adapter erstellte oder bearbeitete Dokumente zu überprüfen.
+
+Da das CouchDB Replication Protocol, das PouchDB zur Synchronisation verwendet, auf REST und HTTP basiert, kann auch der Netzwerkverkehr für die Synchronisation mit Hilfe des Browsers überprüft werden. Google Chrome bietet hierfür beispielsweise einen Network Tab an \cite{google:chrome}. Die Fehlersuche gestaltet sich oftmals einfach, da die entsprechenden HTTP-Statuscodes verwendet werden.
 
 PouchDB wird nicht in TypeScript sondern in JavaScript entwickelt. Daher werden mit dem PouchDB-Paket keine TypeScript-Definitionsdateien ausgeliefert. Im DefinitlyTyped-Repository, das sich als Quelle für Definitionsdateien etabliert hat [Citation Needed], finden sich entsprechende Definitionsdateien, diese entsprechen aber nicht dem aktuellen Entwicklungsstand. Um eine nahtlose Integration in den in Kapitel \ref{Entwicklungsprozess} beschriebenen Entwicklungsprozess zu ermöglichen, mussten die bestehenden Definitionsdateien erweitert werden. 
