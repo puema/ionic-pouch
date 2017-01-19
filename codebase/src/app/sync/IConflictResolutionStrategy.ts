@@ -1,4 +1,6 @@
+import {Article} from "../data/Article";
+
 export interface IConflictResolutionStrategy {
   getName() : string;
-  checkForConflicts(document: any);
+  checkForConflicts(article: Article);
 }

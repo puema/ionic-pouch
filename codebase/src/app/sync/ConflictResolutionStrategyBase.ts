@@ -2,9 +2,11 @@ import {IConflictResolutionStrategy} from "./IConflictResolutionStrategy";
 import {Inject} from "@angular/core";
 import {IDatabaseService} from "../data/pouch-db.service";
 import {Article} from "../data/Article";
-import {ConflictResolutionResult} from "./ConflictResolutionResult";
+import {Conflict} from "./Conflict";
 
 export abstract class ConflictResolutionStrategyBase implements IConflictResolutionStrategy {
+
+  private _syncing: boolean = false;
 
   protected readonly _database: IDatabaseService;
 
@@ -12,23 +14,15 @@ export abstract class ConflictResolutionStrategyBase implements IConflictResolut
     this._database = database;
   }
 
-  public abstract getName() : string;
+  public abstract getName(): string;
 
-  private resolveConflict(currentWinningArticle: Article, nextWinningArticle: Article, revisionsToDelete: Article[]) {
-    currentWinningArticle.value = nextWinningArticle.value;
+  private resolveConflict(conflict: Conflict) {
 
-    this._database.deleteByRev(nextWinningArticle._id, nextWinningArticle._rev);
-
-    for (let article of revisionsToDelete) {
+    for (let article of conflict.conflicts) {
       this._database.deleteByRev(article._id, article._rev);
     }
 
-    this._database.put(currentWinningArticle);
-  }
-
-  private determineWinningRevision(article: Article): ConflictResolutionResult {
-    let conflictingDocuments: Article[] = this.getConflictingRevisions(article);
-    return this.evaluateConflictingArticles(conflictingDocuments);
+    this._database.put(conflict.currentWinner);
   }
 
   private hasConflicts(article: Article): boolean {
@@ -36,28 +30,40 @@ export abstract class ConflictResolutionStrategyBase implements IConflictResolut
   }
 
   public checkForConflicts(article: Article) {
-    if (this.hasConflicts(article)) {
-      let result: ConflictResolutionResult = this.determineWinningRevision(article);
+    if (this._syncing) {
+      return;
+    }
 
-      this.resolveConflict(article, result._winningArticle, result._articlesToDelete);
+    if (this.hasConflicts(article)) {
+
+      this._syncing = true;
+
+      try {
+        this.getConflictingRevisions(article).then((result) => {
+          let conflict: Conflict = this.evaluateConflictingArticles(result);
+          this.resolveConflict(conflict);
+        });
+      } finally {
+        this._syncing = false;
+      }
     }
   }
 
-  protected abstract evaluateConflictingArticles(revisions: Article[]): ConflictResolutionResult;
+  protected abstract evaluateConflictingArticles(conflict: Conflict): Conflict;
 
-  public getConflictingRevisions(article: Article): Article[] {
+  public getConflictingRevisions(article: Article): Promise<Conflict> {
 
-    let conflictRevisions: string[] = article._conflicts;
+      return this._database.getByRev(article._id, article._conflicts).then((result) => { // !!!!!!!
+        let collection: Article[] = [];
+        for (let art of result.rows) {
 
-    var collection: Article[] = [];
-    collection.push(article);
+          if (art.value.rev == article._rev) {
+            continue;
+          }
 
-    for (let revision of conflictRevisions) {
-      this._database.getByRev(article._id, revision).then((result) => {
-        collection.push(result);
+          collection.push(art.doc);
+        }
+        return new Conflict(article, collection);
       });
-    }
-
-    return collection;
   }
 }

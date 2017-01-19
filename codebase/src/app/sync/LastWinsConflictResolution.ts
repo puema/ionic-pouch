@@ -3,7 +3,7 @@ import {ConflictResolutionStrategyBase} from "./ConflictResolutionStrategyBase";
 import {Injectable, Inject} from "@angular/core";
 import {IDatabaseService} from "../data/pouch-db.service";
 import {Article} from "../data/Article";
-import {ConflictResolutionResult} from "./ConflictResolutionResult";
+import {Conflict} from "./Conflict";
 
 @Injectable()
 export class LastWinsConflictResolution extends ConflictResolutionStrategyBase implements IConflictResolutionStrategy {
@@ -16,11 +16,18 @@ export class LastWinsConflictResolution extends ConflictResolutionStrategyBase i
     return "Last Wins";
   }
 
-  protected evaluateConflictingArticles(revisions: Article[]): ConflictResolutionResult {
-    let sortedArray : Article[] = revisions.sort((article1, article2) => article1.timestamp.valueOf() - article2.timestamp.valueOf());
+  protected evaluateConflictingArticles(conflict: Conflict): Conflict {
+
+    let conflicts: Article[] = conflict.conflicts.slice(0);
+
+    conflicts.push(conflict.currentWinner);
+
+    let sortedArray : Article[] = conflicts.sort((article1, article2) => article1.timestamp.valueOf() - article2.timestamp.valueOf());
 
     let winningArticle: Article = sortedArray.shift();
 
-    return new ConflictResolutionResult(winningArticle, sortedArray);
+    conflict.currentWinner.value = winningArticle.value;
+
+    return conflict;
   }
 }
