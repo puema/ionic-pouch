@@ -32,6 +32,8 @@ Das Feld \texttt{\_conflicts} stellt ein String-Array dar, das die verschiedenen
 
 Zur Konfliktbehandlung mit PouchDB muss das Dokument, das vom Benutzer oder Entwickler als Gewinner ausgewählt wird, als neue Revision über dem zeitweiligen Gewinner mit einem \texttt{put()} eingefügt werden. Anschließend müssen die anderen konfliktierenden Revisionen gelöscht werden.
 
+PouchDB bietet Plugins mit fertiger Logik für Konfliktauflösung an \cite{pouch:conflicts}.
+
 \section{Umsetzung der Konfliktauflösung in der Demo-Anwendung}
 
 Zur Beispielhaften Umsetzung der Konfliktauflösung mit PouchDB in der Demo-Anwendung wurden zwei Ansätze gewählt: Ein \emph{Last Wins}-Konzept, bei der die letzte Änderung am Dokument als Gewinner ausgewählt wird sowie ein \emph{Merge}-Konzept, bei dem alle konfliktierenden Revisionen zu einem neuen Dokument zusammengeführt werden.
