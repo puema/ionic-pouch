@@ -18,7 +18,7 @@ export class MergeConflictResolution extends ConflictResolutionStrategyBase impl
   protected evaluateConflictingArticles(conflict: Conflict): Conflict {
     let resultValue: string = conflict.currentWinner.value;
     for (let article of conflict.conflicts) {
-      resultValue = resultValue + article.value + " / ";
+      resultValue = resultValue + " / " + article.value;
     }
 
     // Update WinningArticle, flag all Articles for deletion

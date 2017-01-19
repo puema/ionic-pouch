@@ -22,7 +22,10 @@ export class LastWinsConflictResolution extends ConflictResolutionStrategyBase i
 
     conflicts.push(conflict.currentWinner);
 
-    let sortedArray : Article[] = conflicts.sort((article1, article2) => article1.timestamp.valueOf() - article2.timestamp.valueOf());
+    console.log(conflicts);
+    console.log(conflicts[0].timestamp.valueOf());
+
+    let sortedArray : Article[] = conflicts.sort((article1, article2) => new Date(article2.timestamp).getTime() - new Date(article1.timestamp).getTime());
 
     let winningArticle: Article = sortedArray.shift();
 
