@@ -8,6 +8,8 @@ import {TabsPage} from '../pages/tabs/tabs';
 import {PouchDbService} from './data/pouch-db.service';
 import {GuidService} from './guid/guid.service';
 import {LastWinsConflictResolution} from "./sync/LastWinsConflictResolution";
+import {ConflictResolutionStrategyFactory} from "./sync/ConflictResolutionStrategyFactory";
+import {MergeConflictResolution} from "./sync/MergeConflictResolution";
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import {LastWinsConflictResolution} from "./sync/LastWinsConflictResolution";
   providers: [
     {provide: 'IDatabaseService', useClass: PouchDbService},
     {provide: 'IGuidService', useClass: GuidService},
-    {provide: "IConflictResolutionStrategy", useClass: LastWinsConflictResolution},
+    {provide: "LastWinsConflictResolution", useClass: LastWinsConflictResolution},
+    {provide: "MergeConflictResolution", useClass: MergeConflictResolution},
+    {provide: "ConflictResolutionStrategyFactory", useClass: ConflictResolutionStrategyFactory},
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -1,4 +1,4 @@
 export interface IConflictResolutionStrategy {
-  resolveFor(id: string);
+  getName() : string;
   checkForConflicts(document: any);
 }

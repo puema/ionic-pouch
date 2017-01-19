@@ -12,21 +12,18 @@ export abstract class ConflictResolutionStrategyBase implements IConflictResolut
     this._database = database;
   }
 
-  public resolveFor(id: string) {
-    // this._database.getWithConflicts(id).then((article) => {
-    //   return article;
-    // });
-  }
+  public abstract getName() : string;
 
   private resolveConflict(currentWinningArticle: Article, nextWinningArticle: Article, revisionsToDelete: Article[]) {
     currentWinningArticle.value = nextWinningArticle.value;
 
-    this._database.put(currentWinningArticle);
     this._database.deleteByRev(nextWinningArticle._id, nextWinningArticle._rev);
 
     for (let article of revisionsToDelete) {
       this._database.deleteByRev(article._id, article._rev);
     }
+
+    this._database.put(currentWinningArticle);
   }
 
   private determineWinningRevision(article: Article): ConflictResolutionResult {
@@ -40,9 +37,6 @@ export abstract class ConflictResolutionStrategyBase implements IConflictResolut
 
   public checkForConflicts(article: Article) {
     if (this.hasConflicts(article)) {
-      console.log("CONFLICT!");
-      console.log(article);
-
       let result: ConflictResolutionResult = this.determineWinningRevision(article);
 
       this.resolveConflict(article, result._winningArticle, result._articlesToDelete);
@@ -56,7 +50,7 @@ export abstract class ConflictResolutionStrategyBase implements IConflictResolut
     let conflictRevisions: string[] = article._conflicts;
 
     var collection: Article[] = [];
-    collection.push(article)
+    collection.push(article);
 
     for (let revision of conflictRevisions) {
       this._database.getByRev(article._id, revision).then((result) => {
