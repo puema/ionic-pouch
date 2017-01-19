@@ -1,6 +1,12 @@
 \chapter{CouchDB-Umfeld}
 \label{Umfeld}
 
+\section{Synchronisation}
+
+Die Zusammenarbeit von PouchDB auf der Clientseite und CouchDB auf der Serverseite wird durch die gemeinsame Verwendung des Synchronisationsmechanismus von CouchDB ermöglicht (siehe \ref{API}).
+
+Dokumente können nicht nur zu PouchDB-Clients synchronisiert werden, sondern auch zwischen verschiedenen CouchDB-Servern \cite{couch:replication}.
+
 \section{Security}
 
 \subsection{Absicherung des CouchDB-Servers}
@@ -14,7 +20,7 @@ Als moderne Management-Oberfläche für CouchDB steht die Web-Anwendung \emph{Fa
 	\includegraphics[width=\textwidth]{\figdir/Reverse_Proxy.png}
 \end{figure}
 
-Abbildung \ref{fig:reverseproxy} zeigt in einem Netzwerkdiagramm, wie der CouchDB-Server in diesem Projekt mit dem Internet verbunden ist. Eine Firewall lässt von außen nur Zugriffe über Port 443 (HTTPS) zu. Der Reverse Proxy lauscht an diesem Port und reicht alle Anfragen an den CouchDB/Fauxton-Webserver an Port 8000 weiter. Dabei wird gleichzeitig die TLS-Verbindung terminiert. Somit muss Fauxton keine TLS-Verbindungen aufbauen und braucht keine sicherheitskritischen Informationen über die verwendeten Zertifikate.
+Abbildung \ref{fig:reverseproxy} zeigt in einem Netzwerkdiagramm, wie der CouchDB-Server in diesem Projekt mit dem Internet verbunden ist. Eine Firewall lässt von außen nur Zugriffe über Port 443 (HTTPS) zu. Der Reverse Proxy lauscht an diesem Port und reicht alle Anfragen an den CouchDB/Fauxton-Webserver an Port 8000 weiter. Dabei wird gleichzeitig die TLS-Verbindung terminiert. Somit muss Fauxton keine TLS-Verbindungen aufbauen und benötigt keine sicherheitskritischen Informationen über die verwendeten Zertifikate.
 
 \subsection{Zugangskontrolle}
 
@@ -39,6 +45,4 @@ CouchDB kennt zwei unterschiedliche Benutzerrollen:
 	\end{quotation}
 \end{citeenv}
 
-Damit lässt sich der unauthentifizierte Zugriff auf CouchDB-Datenbanken verhindern. Die Konfiguration erfolgt dabei mit JSON-Dokumenten in der \texttt{\_users}-Datenbank des Servers \cite{couch:security}. Benuterrollen für eine Datenbank können in einem jeweiligen Dokument namens \texttt{\_security} verwaltet werden.
-
-% Todo: Quellen, Passwörter etc.
+Damit lässt sich der unauthentifizierte Zugriff auf CouchDB-Datenbanken verhindern. Die Konfiguration erfolgt dabei mit JSON-Dokumenten in der \texttt{\_users}-Datenbank des Servers \cite{couch:security}. Benuterrollen für eine Datenbank können in einem jeweiligen Dokument namens \texttt{\_security} verwaltet werden. Dies legt eine Architektur mit einer eigenen Datenbank pro Benutzer nahe.

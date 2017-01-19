@@ -34,4 +34,17 @@ Zur Konfliktbehandlung mit PouchDB muss das Dokument, das vom Benutzer oder Entw
 
 \section{Umsetzung der Konfliktauflösung in der Demo-Anwendung}
 
-Zur Beispielhaften Umsetzung der Konfliktauflösung mit PouchDB in der Demo-Anwendung wurden zwei Ansätze gewählt: Ein "last wins"-Konzept, bei der die letzte Änderung am Dokument als Gewinner ausgewählt wird sowie ein "Merge"-Konzept, bei dem alle konfliktierenden Revisionen zu einem neuen Dokument zusammengeführt werden.
+Zur Beispielhaften Umsetzung der Konfliktauflösung mit PouchDB in der Demo-Anwendung wurden zwei Ansätze gewählt: Ein "Last Wins"-Konzept, bei der die letzte Änderung am Dokument als Gewinner ausgewählt wird sowie ein "Merge"-Konzept, bei dem alle konfliktierenden Revisionen zu einem neuen Dokument zusammengeführt werden.
+
+Um die Varianten der Konfliktbehandlung möglichst dynamisch austauschen zu können, wurden diese in der Demo-Anwendung als Strategie-Muster implementiert.
+
+\begin{figure}[htb]
+	\centering
+	\caption{Klassendiagramm: Strategie-Muster für Konfliktauflösung}
+	\label{fig:conflictresolutionstrategy}
+	\includegraphics[width=\textwidth]{\figdir/ConflictResolution.png}
+\end{figure}
+
+Abbildung \ref{fig:conflictresolutionstrategy} zeigt das verwendete Strategie-Muster. Beide Strategien implementieren das Interface \texttt{IConflictResolutionStrategy}, das die Methoden \texttt{getName()} (für die Auswahl in der Oberfläche) und \texttt{checkForConflicts(article: Article)} (zur eigentlichen Konfliktauflösung) vorschreibt.
+
+Eine Factory (\texttt{ConflictResolutionStrategyFactory}) bekommt beide Strategien per \emph{Dependency Injection} übergeben und kann diese anschließend an die Klasse HomePage übergeben, wo beide Strategien ausgewählt und verwendet werden können.
