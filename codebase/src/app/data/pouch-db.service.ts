@@ -10,7 +10,7 @@ import SyncEventEmitter = PouchDB.SyncEventEmitter;
 export interface IDatabaseService {
   changeEventEmitter: ChangeEventEmitter;
   put(article: Article): Promise<Response>;
-  getByRev(id: string, revs: string[]): Promise<AllDocsResponse<Article>>;
+  getByRev(id: string, rev: string): Promise<Article>;
   getAll(): Promise<AllDocsResponse<Article>>;
   delete(article: Article): Promise<Response>;
   deleteByRev(id: string, rev: string): Promise<Response>;
@@ -38,12 +38,8 @@ export class PouchDbService implements IDatabaseService {
     return this.pouchDb.put(article);
   }
 
-  getByRev(id: string, revs: string[]): Promise<AllDocsResponse<Article>> {
-    return this.pouchDb.allDocs({
-      include_docs: true,
-      conflicts: true,
-      key: id
-    });
+  getByRev(id: string, rev: string): Promise<Article> {
+    return this.pouchDb.get(id, {rev: rev});
   }
 
   getAll(): Promise<AllDocsResponse<Article>> {

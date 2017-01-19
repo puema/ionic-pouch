@@ -52,18 +52,37 @@ export abstract class ConflictResolutionStrategyBase implements IConflictResolut
   protected abstract evaluateConflictingArticles(conflict: Conflict): Conflict;
 
   public getConflictingRevisions(article: Article): Promise<Conflict> {
+      //
+      // var promise =  this._database.getByRev(article._id, article._conflicts).then((result) => { // !!!!!!!
+      //   let collection: Article[] = [];
+      //   for (let art of result.rows) {
+      //
+      //     if (art.value.rev == article._rev) {
+      //       continue;
+      //     }
+      //
+      //     collection.push(art.doc);
+      //   }
+      //   return new Conflict(article, collection);
+      // });
+      //
+      // Promise.resolve(promise);
+      //
+      // return promise;
 
-      return this._database.getByRev(article._id, article._conflicts).then((result) => { // !!!!!!!
-        let collection: Article[] = [];
-        for (let art of result.rows) {
 
-          if (art.value.rev == article._rev) {
-            continue;
-          }
+    var conflicts : string[] = article._conflicts;
+    let promises: Promise<Article>[] = [];
 
-          collection.push(art.doc);
-        }
-        return new Conflict(article, collection);
-      });
+    for (let conflict of conflicts) {
+      let promise : Promise<Article> = this._database.getByRev(article._id, conflict);
+
+      promises.push(promise);
+    }
+
+    return Promise.all(promises).then((result) => {
+      console.log(result);
+      return new Conflict(article, result);
+    });
   }
 }
