@@ -2,13 +2,13 @@
 \label{Verwendete Technologien}
 
 \section{Angular 2}
-Es gibt unzählige Frameworks und Technologien für die Webentwicklung mit Java\-Script. Die weite Verbreitung von dem Platzhirsch \emph{AngularJS} kann beispielsweise durch die Anzahl an mit dem Tag "`angularjs"' versehenen Fragen auf \texttt{stackoverflow.com} belegt werden. Januar 2017 sind es 213 992 Fragen. Im Vergleich dazu sind 20 343 Fragen mit einem entsprechendem \emph{Ember.js} Tag versehen und bei dem immer beliebter werdenden Framework \emph{React.js} von \emph{Facebook} sind es immerhin 30 222 \cite{stackoverflow}.
+Es gibt unzählige Frameworks und Technologien für die Webentwicklung mit Java\-Script. Die weite Verbreitung von \emph{Angular} (oder auch \emph{AngularJS}) kann beispielsweise durch die Anzahl an mit dem Tag "`angularjs"' versehenen Fragen auf \texttt{stackoverflow.com} belegt werden. Januar 2017 sind es 213 992 Fragen. Im Vergleich dazu sind 20 343 Fragen mit einem entsprechendem \emph{Ember.js} Tag versehen und bei dem immer beliebter werdenden Framework \emph{React.js} von \emph{Facebook} sind es immerhin 30 222 \cite{stackoverflow}.
 
-Angular (oder auch AngularJS) ist ein seit 2009 von Google Inc. entwickeltes Framework und Open-Source-Projekt für Single-Page-Applicationen, d.h. Applikationen, die nur aus einer einzelnen HTML-Seite bestehen und deren Inhalte dynamisch nachgeladen werden. Die Sofwareentwicklung mit Angular wird im Gegensatz zu Softwareentwicklung mit reinem JavaScript deutlich vereinfacht, indem dem Entwickler Strukturen und Bibliotheken vorgegeben und Entscheidungen abgenommen werden. Mit dem Model-View-ViewModel unterstützt Angular bidirektionales Databinding.
+Angular ist ein seit 2009 von Google Inc. entwickeltes Framework und Open-Source-Projekt für Single-Page-Applicationen, d.h. Applikationen, die nur aus einer einzelnen HTML-Seite bestehen und deren Inhalte dynamisch nachgeladen werden. Die Sofwareentwicklung mit Angular wird im Gegensatz zu Softwareentwicklung mit reinem JavaScript deutlich vereinfacht, indem dem Entwickler Strukturen und Bibliotheken vorgegeben und Entscheidungen abgenommen werden. Mit dem Model-View-ViewModel-Pattern unterstützt Angular bidirektionales Databinding.
 
 Seit 2015 wird Angular 2 entwickelt und die zugrunde liegende Architektur von Angular wurde in diesem Zuge komplett überarbeitet. Angular 2 ist somit auch nicht mehr zu Angular 1 kompatibel. Der offensichtlichste Unterschied zu Angular 1 ist die Sprache in der Angular 2 geschrieben ist. Es wurde auf den Javascript Aufsatz TypeScript gesetzt. Dieser wurde von Microsoft entwickelt und erweitert JavaScript um die Möglichkeit objektorientiert und typsicher zu programmieren. TypeScript kann zu nativem JavaScript transpiliert werden.
 
-Weiterhin ist Angular 2 Komponenten-orientiert. Das bedeutet, dass eine Applikation in beliebig viele kleine Komponenten aufgeteilt werden können, die durch gekapselte Logik und Wiederverwendbarkeit geprägt sind. Jede Komponente besteht aus einem Template in HTML, einer zugehörigen Klasse in Typescript und Sytlesheets in CSS oder mithilfe von CSS-Präprozessoren wie SASS oder LESS.
+Weiterhin ist Angular 2 Komponenten-orientiert. Das bedeutet, dass eine Applikation in beliebig viele kleine Komponenten aufgeteilt werden kann, die durch gekapselte Logik und Wiederverwendbarkeit geprägt sind. Jede Komponente besteht aus einem Template in HTML, einer zugehörigen Klasse in Typescript und Sytlesheets in CSS oder in einer CSS-Präprozessor-Sprache wie SASS oder LESS.
 
 Eine \texttt{HelloWorld}-Komponente würde in Angular 2 folgendermaßen aussehen:
 \begin{codebox}
@@ -33,12 +33,12 @@ Diese \texttt{HelloWorld}-Komponente könnte dann in einer Eltern-Komponente mit
 <hello-world></hello-world>
 \end{lstlisting}
 \end{codebox}
-eingebunden werden.
+eingebunden werden. Innerhalb dieses Tags würde Angular dann einen roten Paragraph mit dem Inhalt "`Hello world!"' rendern.
 
 \section{Cordova}
 Um mit den Standard-Webtechnologien HTML5, CSS und JavaScript eine offline-fähige mobile App entwickeln zu können, bedarf es einer Technologie, um Webanwendungen in native, mobile Apps zu verpacken. Laut Shotts ermöglicht das Open-Source-Framework Cordova genau das \cite{shotts:phonegap}.
 
-Die so entstehende native App besteht, wie in Abbildung \ref{fig:cordova} zu sehen, aus einem WebView-Element, also einem Browserfenster, das die vorher erwähnte Webanwendung im Vollbild anzeigt. Über das WebView-Element können, wie in einem herkömmlichen Browser, HTML- und CSS-Dateien dargestellt und JavaScript-Code ausgeführt werden. Das WebView greift auf den Standardbrowser des Betriebssystems zurück und erlaubt es dem Benutzer mit der App zu interagieren.
+Die so entstehende native App besteht, wie in Abbildung \ref{fig:cordova} zu sehen, aus einem WebView-Element, also einem Browserfenster, das die Webanwendung im Vollbild anzeigt. Über das WebView-Element können, wie in einem herkömmlichen Browser, HTML- und CSS-Dateien dargestellt und JavaScript-Code ausgeführt werden. Das WebView greift auf den Standardbrowser des Betriebssystems zurück und erlaubt es dem Benutzer mit der App zu interagieren.
 
 Cordova stellt darüber hinaus über eine JavaScript-Programmierschnittstelle Plug-Ins zur Verfügung, um auf die darunterliegende Plattform zuzugreifen. Diese Plug-Ins teilen sich in Core Plug-Ins und Drittanbieter Plug-Ins auf. Core Plug-Ins werden vom Cordova Team zur Verfügung gestellt und erlauben zum Beispiel den Zugriff auf die Kamera oder das Dateisystem des Gerätes. Die Funktionalität von Cordova kann durch selbst entwickelte oder Drittanbieter-Plug-Ins zusätzlich erweitert werden. Als mögliche Beispiele für Drittanbieter-Plug-Ins nennt Shotts einen Barcode Scanner oder ein Plug-In, um Inhalte über soziale Netzwerke zu teilen \cite{shotts:phonegap}.
 
@@ -60,7 +60,7 @@ Lässt sich Angular und Cordova miteinander verbinden, um die Vorteile von beide
 
 Mit Ionic kann eine Angular-Applikation sehr komfortabel plattformübergreifend in eine mobile Applikationen verwandelt werden. Es wird Ionic für Angular 1 und 2 angeboten.
 
-Ionic bietet über die Funktionalität von Cordova hinaus fertige Angular-Komponenten an, die sich der Zielplattform entsprechend anpassen. Dadurch bekommt der Nutzer der mobilen Applikation das gewohnte Look-and-Feel des verwendeten Betriebssystems. Von Ionic werden die Plattformen iOS, Android und Windows Phone unterstützt. Es sind Komponenten wie \texttt{Header}, \texttt{Tabs} oder \texttt{List} verfügbar, die wie in Kapitel \ref{Verwendete Technologien} anhand der \texttt{HelloWorld}-Komponente veranschaulicht, im HTML-Template verwendet werden können. In Abbildung \ref{fig:loog-and-feel} wird am Beispiel von der Komponente \texttt{Action Sheet} das unterschiedliche Layout auf den unterstützten Plattformen illustriert.
+Ionic bietet über die Funktionalität von Cordova hinaus fertige Angular-Komponenten, die sich der Zielplattform entsprechend anpassen. Dadurch bekommt der Nutzer der mobilen Applikation das gewohnte Look-and-Feel des verwendeten Betriebssystems. Von Ionic werden die Plattformen iOS, Android und Windows Phone unterstützt. Es sind Komponenten wie \texttt{Header}, \texttt{Tabs} oder \texttt{List} verfügbar, die wie in Kapitel \ref{Verwendete Technologien} anhand der \texttt{HelloWorld}-Komponente veranschaulicht, im HTML-Template verwendet werden können. In Abbildung \ref{fig:loog-and-feel} wird am Beispiel von der Komponente \texttt{Action Sheet} das unterschiedliche Layout auf den unterstützten Plattformen illustriert.
 
 \begin{figure}[htb]
 \centering
@@ -80,7 +80,7 @@ Ionic bietet über die Funktionalität von Cordova hinaus fertige Angular-Kompon
 \end{subfigure}
 \end{figure}
 
-Es wird deutlich, dass auch unterschiedliche Symbole verwendet werden. Dies passiert bei Verwendung von Ionic-Icons, von denen hunderte verfügbar sind, alles automatisch im Hintergrund.
+Es wird deutlich, dass zum Beispiel auch unterschiedliche Symbole verwendet werden. Dies passiert bei der Verwendung von Ionic-Icons automatisch im Hintergrund.
 
 Weiterhin können die Schnittstellen und Plugins von Cordova in TypeScript typsicher verwendet werden, sodass zum Beispiel per TypeScript auf die Kamera zugegriffen werden kann.
 
