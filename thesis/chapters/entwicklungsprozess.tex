@@ -5,7 +5,7 @@
 
 Für die Entwicklung mit Ionic steht eine eigene Kommandozeilenschnittstelle (CLI) bereit. Diese kann über den Node Package Manager npm installiert werden \cite{ionic:cli}. Die Ionic-CLI gibt manche Kommandos, wie zum Beispiel das \texttt{build}-Kommando an die darunterliegende Cordova-CLI weiter \cite{ionic:build}.
 
-Mit Hilfe des \texttt{start}-Kommandos können neue Ionic-Projekte erstellt werden. Folgender Codeausschnitt zeigt, wie mit der Ionic-CLI ein neues Projekt Ionic2-Projekt mit dem Namen myAwesomeApp erstellt werden kann \cite{ionic:cli}.
+Mit Hilfe des \texttt{start}-Kommandos können neue Ionic-Projekte erstellt werden. Folgender Codeausschnitt zeigt, wie mit der Ionic-CLI ein neues Ionic2-Projekt mit dem Namen myAwesomeApp erstellt werden kann \cite{ionic:cli}.
 \begin{codebox}
 \begin{lstlisting}[style=typescript]
 $ ionic start myAwesomeApp --v2
@@ -19,7 +19,7 @@ $ ionic serve
 \end{lstlisting}
 \end{codebox}
 
-Nic Raboy nennt in einem Blogeintrag zwei Gründe weshalb es nicht ausreicht Ionic Apps mit dem \texttt{serve}-Kommando im Browser zu testen. Einerseits kann nativer Code, zum Beispiel Cordova-Plugins nicht im Browser ausgeführt werden. Dementsprechend können Funktionalitäten, die auf Cordova-Plugins zurückgreifen, im Browser getestet werden. Andererseits dient Ionic zum Erstellen von mobilen Apps, darum sollte man sie auch als solche auf einem entsprechenden Gerät und nicht nur im Browser testen \cite{raboy:serve}. Die Ionic Dokumentation betont dies ebenfalls:
+Nic Raboy nennt in einem Blogeintrag zwei Gründe weshalb es nicht ausreicht Ionic Apps mit dem \texttt{serve}-Kommando im Browser zu testen. Einerseits kann nativer Code, zum Beispiel Cordova-Plugins nicht im Browser ausgeführt werden. Dementsprechend können Funktionalitäten, die auf Cordova-Plugins zurückgreifen, im Browser nicht getestet werden. Andererseits dient Ionic zum Erstellen von mobilen Apps, darum sollte man sie auch als solche auf einem entsprechenden Gerät und nicht nur im Browser testen \cite{raboy:serve}. Die Ionic Dokumentation betont dies ebenfalls:
 \begin{citeenv}
 	``Since we are building a native (or “hybrid”) app, we can (and should!) test it as one.'' \cite{ionic:testing}
 \end{citeenv}
